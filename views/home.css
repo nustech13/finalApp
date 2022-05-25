@@ -98,7 +98,7 @@ div.card-photo {
     justify-content: center;
     width: 500px;
     height: 220px;
-    background-color: rgb(203, 221, 221);
+    background-color: #D8D5D5;
     border-radius: 5px;
     margin: 10px;
 }
@@ -154,12 +154,13 @@ div.card-photo div.content div.like a{
     bottom: 0px;
     left: 10px;
     font-size: 12px;
+    color: #3B5998;
 }
 div.card-photo div.content div.like span{
     position: absolute;
     bottom: 0px;
     right: 10px;
-    color: rgb(192, 193, 194);
+    color: rgb(136, 138, 139);
     font-size: 12px;
 }
 div.list-card {
