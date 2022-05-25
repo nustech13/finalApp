@@ -3,13 +3,153 @@ html
     head
         meta(name='viewport', content='width=device-width')
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
-
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous")
+        style
+            include ./home.css
     body
-        div.container
+        div.container-fluid
             header
-                
+                nav.header
+                    div.nav
+                        span.nav-name Fotobook 
+                        form.nav-input
+                            input.nav-search.form-control(type="text", name="", placeholder="Search Photo / Album")
+                        ul.nav-right
+                            li 
+                                img(src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png", alt="")
+                            li
+                                a(href="#")  Thuan Nguyen
+                            li
+                                a(href="#")  Logout   
             section
-                
+                div.category
+                    ul
+                        li 
+                            a(href="#").active Feeds
+                        li 
+                            a(href="#") My Photos
+                        li 
+                            a(href="#") My Albums
+                div.container
+                    div.choice.btn-group
+                        button.active PHOTO
+                        button ALBUM
+                    div.list-card 
+                        div.card-photo 
+                            div.image
+                                img(src="https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg", alt="").pic1
+                                img(src="https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg", alt="").pic2
+                                img(src="https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg", alt="").pic3
+                            div.content
+                                div.user     
+                                    img(src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png", alt="")
+                                    span Thuan Nguyen
+                                div.title-photo
+                                    span Nam tempor posuere faucibus
+                                div.content-photo 
+                                    span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis at justo sit amet porttitor. Integer iaculis at justo sit amet porttitor.
+                                div.like
+                                    a 
+                                        i.fas.fa-heart  123
+                                    span 4:56 pm 25/05/2022
+                        div.card-photo 
+                            div.image
+                                img(src="https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png", alt="").pic1
+                                img(src="https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png", alt="").pic2
+                                img(src="https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png", alt="").pic3
+                            div.content
+                                div.user     
+                                    img(src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png", alt="")
+                                    span Thuan Nguyen
+                                div.title-photo
+                                    span Nam tempor posuere faucibus
+                                div.content-photo 
+                                    span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis at justo sit amet porttitor. Integer iaculis at justo sit amet porttitor.
+                                div.like
+                                    a 
+                                        i.fas.fa-heart  123
+                                    span 4:56 pm 25/05/2022
+                        div.card-photo 
+                            div.image
+                                img(src="https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg", alt="").pic1
+                                img(src="https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg", alt="").pic2
+                                img(src="https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg", alt="").pic3
+                            div.content
+                                div.user     
+                                    img(src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png", alt="")
+                                    span Thuan Nguyen
+                                div.title-photo
+                                    span Nam tempor posuere faucibus
+                                div.content-photo 
+                                    span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis at justo sit amet porttitor. Integer iaculis at justo sit amet porttitor.
+                                div.like
+                                    a 
+                                        i.fas.fa-heart  123
+                                    span 4:56 pm 25/05/2022
+                        div.card-photo 
+                            div.image
+                                img(src="https://meta.vn/Data/image/2021/09/21/hinh-anh-cho-con-3.jpg", alt="").pic1
+                                img(src="https://meta.vn/Data/image/2021/09/21/hinh-anh-cho-con-3.jpg", alt="").pic2
+                                img(src="https://meta.vn/Data/image/2021/09/21/hinh-anh-cho-con-3.jpg", alt="").pic3
+                            div.content
+                                div.user     
+                                    img(src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png", alt="")
+                                    span Thuan Nguyen
+                                div.title-photo
+                                    span Nam tempor posuere faucibus
+                                div.content-photo 
+                                    span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis at justo sit amet porttitor. Integer iaculis at justo sit amet porttitor.
+                                div.like
+                                    a 
+                                        i.fas.fa-heart  123
+                                    span 4:56 pm 25/05/2022
+                        div.card-photo 
+                            div.image
+                                img(src="https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png", alt="").pic1
+                                img(src="https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png", alt="").pic2
+                                img(src="https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png", alt="").pic3
+                            div.content
+                                div.user     
+                                    img(src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png", alt="")
+                                    span Thuan Nguyen
+                                div.title-photo
+                                    span Nam tempor posuere faucibus
+                                div.content-photo 
+                                    span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis at justo sit amet porttitor. Integer iaculis at justo sit amet porttitor.
+                                div.like
+                                    a 
+                                        i.fas.fa-heart  123
+                                    span 4:56 pm 25/05/2022
+                        div.card-photo 
+                            div.image
+                                img(src="https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg", alt="").pic1
+                                img(src="https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg", alt="").pic2
+                                img(src="https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg", alt="").pic3
+                            div.content
+                                div.user     
+                                    img(src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png", alt="")
+                                    span Thuan Nguyen
+                                div.title-photo
+                                    span Nam tempor posuere faucibus
+                                div.content-photo 
+                                    span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer iaculis at justo sit amet porttitor. Integer iaculis at justo sit amet porttitor.
+                                div.like
+                                    a 
+                                        i.fas.fa-heart  123
+                                    span 4:56 pm 25/05/2022
+                    div.page
+                        ul
+                            li.page-item
+                                a(href="#").page-link.active Previous
+                            li.page-item
+                                a(href="#").page-link 1
+                            li.page-item
+                                a(href="#").page-link 2
+                            li.page-item
+                                a(href="#").page-link 3
+                            li.page-item
+                                a(href="#").page-link Next                  
+
             footer
                 
             
