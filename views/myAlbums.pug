@@ -1,0 +1,115 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width')
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
+        link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
+        title My Albums
+        style
+            include ./feeds.css
+            include ./myPhotos.css
+            include ./viewPhoto.css
+        script 
+            include ./viewPhoto.js
+    body
+        div.container-fluid
+            include ./nav.pug  
+            section
+                div.category
+                    ul
+                        li 
+                            a(href="/feeds") Feeds
+                        li 
+                            a(href="/photos") My Photos
+                        li 
+                            a(href="/albums").active My Albums
+                div.container.container-my-photo.boxed-photo
+                    div.btn-addNew
+                        button.btn.btn-success Add New Album
+                    div.list-my-card 
+                        div.card-my-photo 
+                            div.my-image.album-image
+                                img(src="https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg", alt="" 
+                                    onclick="showPhoto(\"https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg\")").album.pic1
+                                img(src="https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg", alt="" 
+                                    onclick="showPhoto(\"https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg\")").album.pic2
+                                img(src="https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg", alt="" 
+                                    onclick="showPhoto(\"https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg\")").album.pic3
+                                div.my-title
+                                    span Nam tempor posuere faucibus sdsddsdsdsdddddddddddddddddddddddđ
+                                    i.fas.fa-edit
+                                i.fas.fa-lock
+                        div.card-my-photo 
+                            div.my-image.album-image
+                                img(src="https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png", alt="" 
+                                    onclick="showPhoto(\"https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png\")").album.pic1
+                                img(src="https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png", alt="" 
+                                    onclick="showPhoto(\"https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png\")").album.pic2
+                                img(src="https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png", alt="" 
+                                    onclick="showPhoto(\"https://bytuong.com/wp-content/uploads/2019/06/hinh-anh-hinh-nen-con-cao-dep-de-thuong-21.png\")").album.pic3
+                                div.my-title
+                                    span N
+                                    i.fas.fa-edit
+                        div.card-my-photo 
+                            div.my-image.album-image
+                                img(src="https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg", alt="" 
+                                    onclick="showPhoto(\"https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg\")").album.pic1
+                                img(src="https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg", alt="" 
+                                    onclick="showPhoto(\"https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg\")").album.pic2
+                                img(src="https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg", alt="" 
+                                    onclick="showPhoto(\"https://trungtamtienghan.edu.vn/uploads/blog/2019_08/cach-noi-con-meo-trong-tieng-han.jpg\")").album.pic3
+                                div.my-title
+                                    span Nam tempor posuere faucibus
+                                    i.fas.fa-edit
+                        div.card-my-photo 
+                            div.my-image.album-image
+                                img(src="https://icdn.dantri.com.vn/thumb_w/660/2021/06/09/chodocx-1623207689539.jpeg", alt="" 
+                                    onclick="showPhoto(\"https://icdn.dantri.com.vn/thumb_w/660/2021/06/09/chodocx-1623207689539.jpeg\")").album.pic1
+                                img(src="https://icdn.dantri.com.vn/thumb_w/660/2021/06/09/chodocx-1623207689539.jpeg", alt="" 
+                                    onclick="showPhoto(\"https://icdn.dantri.com.vn/thumb_w/660/2021/06/09/chodocx-1623207689539.jpeg\")").album.pic2
+                                img(src="https://icdn.dantri.com.vn/thumb_w/660/2021/06/09/chodocx-1623207689539.jpeg", alt="" 
+                                    onclick="showPhoto(\"https://icdn.dantri.com.vn/thumb_w/660/2021/06/09/chodocx-1623207689539.jpeg\")").album.pic3
+                                div.my-title
+                                    span Nam tempor posuere faucibus
+                                    i.fas.fa-edit
+                                i.fas.fa-lock
+                        div.card-my-photo 
+                            div.my-image.album-image
+                                img(src="https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png", alt="" 
+                                    onclick="showPhoto(\"https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png\")").album.pic1
+                                img(src="https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png", alt="" 
+                                    onclick="showPhoto(\"https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png\")").album.pic2
+                                img(src="https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png", alt="" 
+                                    onclick="showPhoto(\"https://vansu.net/sites/default/files/pictures/08/2-con-ho-trang.png\")").album.pic3
+                                div.my-title
+                                    span Nam tempor posuere faucibus
+                                    i.fas.fa-edit
+                        div.card-my-photo 
+                            div.my-image.album-image
+                                img(src="https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg", alt="" 
+                                    onclick="showPhoto(\"https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg\")").album.pic1
+                                img(src="https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg", alt="" 
+                                    onclick="showPhoto(\"https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg\")").album.pic2
+                                img(src="https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg", alt="" 
+                                    onclick="showPhoto(\"https://sogiacmo.com/administrator/webroot/upload/image/images/so-mo/mo-thay-con-tho.jpg\")").album.pic3
+                                div.my-title
+                                    span Nam tempor posuere faucibus
+                                    i.fas.fa-edit
+                                i.fas.fa-lock
+                    div.page.my-page
+                        ul  
+                            li.page-item
+                                a(href="#").page-link.active Previous
+                            li.page-item
+                                a(href="#").page-link 1
+                            li.page-item
+                                a(href="#").page-link 2
+                            li.page-item
+                                a(href="#").page-link 3
+                            li.page-item
+                                a(href="#").page-link Next                  
+
+            footer
+                
+            
