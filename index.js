@@ -10,9 +10,6 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '/views'));
-app.get('/feeds', (request, response) => {
-  response.render('feeds');
-});
 router_config(app);
 
 app.listen(port , () => {
