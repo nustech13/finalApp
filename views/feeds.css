@@ -1,14 +1,12 @@
 * {
     padding: 0; 
     margin: 0;
-    box-sizing: border-box;
 }
-body {
-    background-color: #F7F7F7;
-}
+
 div.container-fluid{
     padding-left: 0 !important;
     padding-right: 0 !important;
+    background-color: #F7F7F7;
 }
 nav.header {
     height: 60px;
@@ -171,7 +169,7 @@ div.title-photo{
 div.content-photo {
     margin-top: 5px;
     font-size: 13px;
-    font-weight: 200;
+    font-weight: 400;
     width: 240px;
     height: 80px;
     position: relative;
