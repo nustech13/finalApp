@@ -1,0 +1,44 @@
+
+div.container-login{
+    background-color: #fff;
+    height: 100vh;
+}
+div.container-login h1.login{
+    color: #3B5998;
+    font-weight: 600;
+    margin-top: 80px;
+}
+section div.container form.login-form{
+    width: 500px;
+    height: 400px;
+    background-color: #E0E0E0;
+    margin: 20px 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+section div.container form.login-form img{
+    width: 200px;
+    height: 200px;
+}
+section div.container form.login-form input{
+    padding: 0 10px;
+    width: 80%;
+}
+section div.container form.login-form input.email-login{
+    border-bottom: none;
+}
+section div.container form.login-form button{
+    border: 1px solid #111;
+    margin: 20px 0;
+    width: 150px;
+    background-color: #3B5998;
+    color: #fff;
+    font-weight: 600;
+}
+a.login-link{
+    text-decoration: none;
+    color: #3B5998;
+}

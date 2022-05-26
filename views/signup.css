@@ -1,0 +1,24 @@
+
+form.signup-form{
+    width: 500px;
+    height: 500px;
+    background-color: #E0E0E0;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+form.signup-form div.input-form{
+    width: 80%;
+    margin-top: 10px;
+}
+section div.container form.signup-form button{
+    border: 1px solid #111;
+    margin: 20px 0;
+    width: 150px;
+    background-color: #3B5998;
+    color: #fff;
+    font-weight: 600;
+}

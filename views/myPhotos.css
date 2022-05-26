@@ -1,0 +1,95 @@
+div.container div.list-my-card {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+}
+section div.container-my-photo{
+    height: calc(100vh - 90px);
+    justify-content: flex-start;
+}
+div.container div.list-my-card div.card-my-photo{
+    width: 23%;
+    margin: 10px 20px 10px 0px;
+}
+div.container div.list-my-card div.card-my-photo div.my-image{
+    width: 100%;
+    position: relative;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.container div.list-my-card div.card-my-photo div.album-image{
+    background-color: #F7F7F7;
+    border-radius: 5px;
+}
+div.container div.list-my-card div.card-my-photo div.my-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+}
+div.container div.list-my-card div.card-my-photo div.my-image img.album{
+    width: 80%;
+    height: 80%;
+    position: absolute;
+}
+div.container div.list-my-card div.card-my-photo div.my-image img.pic1{
+    z-index: 1000;
+}
+div.container div.list-my-card div.card-my-photo div.my-image img.pic2{
+    transform: rotate(12deg);
+}
+div.container div.list-my-card div.card-my-photo div.my-image img.pic3{
+    transform: rotate(6deg);
+}
+div.container div.list-my-card div.card-my-photo div.my-image div.my-title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 1000;
+    border-radius: 5px 5px 0 0;
+}
+div.container div.list-my-card div.card-my-photo div.my-image div.my-title span{
+    color: #fff;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    right: 35px;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+div.container div.list-my-card div.card-my-photo div.my-image div.my-title i{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+div.btn-addNew{
+    width: 100%;
+    border-bottom: 3px solid #797777;
+}
+div.btn-addNew button{
+    margin: 20px 0;
+    float: right;
+}
+div.my-page ul{
+    margin-top: 80px;
+}
+div.card-my-photo div.my-image i.fa-lock{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #3B5898;
+    cursor: pointer;
+}

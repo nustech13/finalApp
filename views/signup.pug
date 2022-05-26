@@ -1,0 +1,40 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width')
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
+        link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
+        title Signup
+        style
+            include ./feeds.css
+            include ./signup.css
+            include ./login.css
+    body
+        div.container-fluid.container-login   
+            include ./nav.pug
+            section
+                div.container 
+                    h1.login Fotobook Signup
+                    form.signup-form
+                        div.input-form
+                            label(for="") First Name
+                            input(type="text", placeholder="First Name" required).form-control
+                        div.input-form
+                            label(for="") Last Name
+                            input(type="text", placeholder="Last Name" required).form-control
+                        div.input-form
+                            label(for="") Email
+                            input(type="text", placeholder="Email" required).form-control
+                        div.input-form
+                            label(for="") New Password
+                            input(type="password", placeholder="Password" required).form-control
+                        div.input-form
+                            label(for="") Password Confimnation
+                            input(type="password", placeholder="Password" required).form-control
+                        button(type="submit").btn Signup
+
+
+
+
+            
