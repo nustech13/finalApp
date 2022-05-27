@@ -1,0 +1,55 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width')
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
+        link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
+        title Add Photo
+        style
+            include ../feeds/feeds.css
+            include ../albums/addAlbum.css
+    body
+        div.container-fluid
+            include ../nav/nav.pug  
+            section
+                div.category
+                    ul
+                        li 
+                            a(href="/feeds") Feeds
+                        li 
+                            a(href="/photos") My Photos
+                        li 
+                            a(href="/albums") My Albums
+                div.container.container-add
+                    form
+                        div.top
+                            h4 New Photo
+                            a(href="/photos" type="button") Back   
+                        div.center
+                            div.left
+                                div.title
+                                    label(for="") Title
+                                    input(type="text", name="", maxlength="10") 
+                                div.lock
+                                    label(for="") Sharing mode
+                                    select(name="")
+                                        option(value="true") Public
+                                        option(value="false") Private
+                                div.image
+                                    label(for="file-input") 
+                                        img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")
+                                    input#file-input(type="file", accept="image/*")
+                            div.right
+                                label(for="") Description
+                                textarea(name="", cols="30", rows="4")      
+                        div.bottom
+                            button Save
+
+
+                    
+                                    
+
+            footer
+                
+            
