@@ -3,7 +3,7 @@ import express from "express";
 const feedRouter = express.Router();
 
 feedRouter.get("/", (request, response) => {
-  var photos = [
+  const photos = [
     {
       id: "1",
       image: "https://ngheandata.com/wp-content/uploads/2022/01/anh-ho-dep.jpg",
@@ -66,7 +66,7 @@ feedRouter.get("/", (request, response) => {
     },
     
   ]
-  response.render("feeds", {photos: photos});
+  response.render("feeds/feeds", {photos: photos});
 });
 
 

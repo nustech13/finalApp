@@ -1,0 +1,60 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width')
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
+        link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
+        title My Albums
+        style
+            include ../feeds/feeds.css
+            include ../photos/myPhotos.css
+        script 
+            include ./viewAlbum.js
+    body
+        div.container-fluid.wrapper
+            include ../nav/nav.pug  
+            section
+                include ./viewAlbum.pug
+                div.category
+                    ul
+                        li 
+                            a(href="/feeds") Feeds
+                        li 
+                            a(href="/photos") My Photos
+                        li 
+                            a(href="/albums").active My Albums
+                div.container.container-my-photo.boxed-photo
+                    div.btn-addNew
+                        button.btn.btn-success Add New Album
+                    div.list-my-card 
+                        each album in albums
+                            div.card-my-photo 
+                                div.my-image.album-image
+                                    - var list = album.images.toString();
+                                    img(src= album.images[0], alt="" 
+                                        onclick=`showAlbum(\"${list}\", \"${album.title}\", \"${album.content}\")`).album.pic1
+                                    img(src= album.images[0], alt="" 
+                                        onclick="").album.pic2
+                                    img(src= album.images[0], alt="" 
+                                        onclick="").album.pic3
+                                    div.my-title
+                                        span= album.title   
+                                        i.fas.fa-edit
+                                    i.fas.fa-lock
+                    div.page.my-page
+                        ul  
+                            li.page-item
+                                a(href="#").page-link.active Previous
+                            li.page-item
+                                a(href="#").page-link 1
+                            li.page-item
+                                a(href="#").page-link 2
+                            li.page-item
+                                a(href="#").page-link 3
+                            li.page-item
+                                a(href="#").page-link Next                  
+
+            footer
+                
+            
