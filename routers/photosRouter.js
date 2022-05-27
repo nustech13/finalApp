@@ -66,4 +66,8 @@ photosRouter.get("/", (request, response) => {
   ]
   response.render("photos/myPhotos", {photos: photos});
 });
+photosRouter.get("/add", (request, response) => {
+
+  response.render("photos/addPhoto"); 
+})
 export default photosRouter;

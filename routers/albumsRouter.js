@@ -67,4 +67,8 @@ albumsRouter.get("/", (request, response) => {
   response.render("albums/myAlbums", {albums: albums});
 });
 
+albumsRouter.get("/add", (request, response) => {
+
+  response.render("albums/addAlbum"); 
+})
 export default albumsRouter;

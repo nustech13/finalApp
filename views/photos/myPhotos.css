@@ -78,9 +78,18 @@ div.btn-addNew{
     width: 100%;
     border-bottom: 3px solid #797777;
 }
-div.btn-addNew button{
+div.btn-addNew a{
     margin: 20px 0;
     float: right;
+    border: 2px solid #111;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.3s linear;
+}
+div.btn-addNew a:hover{
+    background-color: #fff;
+    color: #111;
+    border: 2px solid #111;
 }
 div.my-page ul{
     margin-top: 80px;

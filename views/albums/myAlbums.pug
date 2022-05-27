@@ -26,14 +26,13 @@ html
                             a(href="/albums").active My Albums
                 div.container.container-my-photo.boxed-photo
                     div.btn-addNew
-                        button.btn.btn-success Add New Album
+                        a.btn.btn-success(href="/albums/add") Add New Album
                     div.list-my-card 
                         each album in albums
                             div.card-my-photo 
                                 div.my-image.album-image
-                                    - var list = album.images.toString();
                                     img(src= album.images[0], alt="" 
-                                        onclick=`showAlbum(\"${list}\", \"${album.title}\", \"${album.content}\")`).album.pic1
+                                        onclick=`showAlbum(\"${album.images.toString()}\", \"${album.title}\", \"${album.content}\")`).album.pic1
                                     img(src= album.images[0], alt="" 
                                         onclick="").album.pic2
                                     img(src= album.images[0], alt="" 

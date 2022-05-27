@@ -1,5 +1,3 @@
-const { lazyrouter } = require("express/lib/application");
-
 function closeAlbum(){
     var b = document.getElementsByClassName("show-photo")[0];
     var innerRemove = document.getElementsByClassName("carousel-inner")[0];
