@@ -1,0 +1,56 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width')
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
+        link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
+        title My Photos
+        style
+            include ../feeds/feeds.css
+            include ./myPhotos.css
+            include ./viewPhoto.css
+        script 
+            include ./viewPhoto.js
+    body
+        div.container-fluid.wrapper
+            include ../nav/nav.pug  
+            section
+                include ./viewPhoto.pug
+                div.category
+                    ul
+                        li 
+                            a(href="/feeds") Feeds
+                        li 
+                            a(href="/photos").active My Photos
+                        li 
+                            a(href="/albums") My Albums
+                div.container.container-my-photo.boxed-photo
+                    div.btn-addNew
+                        button.btn.btn-success Add New Photo
+                    div.list-my-card 
+                        each photo in photos
+                            div.card-my-photo 
+                                div.my-image
+                                    img(src= photo.image, alt="" 
+                                        onclick=`showPhoto(\"${photo.image}\", \"${photo.title}\", \"${photo.content}\")`)
+                                    div.my-title
+                                        span= photo.title
+                                        i.fas.fa-edit
+                                    i.fas.fa-lock
+                    div.page.my-page
+                        ul  
+                            li.page-item
+                                a(href="#").page-link.active Previous
+                            li.page-item
+                                a(href="#").page-link 1
+                            li.page-item
+                                a(href="#").page-link 2
+                            li.page-item
+                                a(href="#").page-link 3
+                            li.page-item
+                                a(href="#").page-link Next                  
+
+            footer
+                
+            
