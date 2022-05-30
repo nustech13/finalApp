@@ -33,11 +33,12 @@ html
                             div.card-my-photo 
                                 div.my-image
                                     img(src= photo.image, alt="" 
-                                        onclick=`showPhoto(\"${photo.image}\", \"${photo.title}\", \"${photo.content}\")`)
+                                        onclick=`showPhoto(\"${photo.image}\", \"${photo.title}\", \"${photo.description}\")`)
                                     div.my-title
                                         span= photo.title
-                                        i.fas.fa-edit
-                                    i.fas.fa-lock
+                                        i.fas.fa-edit   
+                                    if !photo.isPublic
+                                        i.fas.fa-lock
                     div.page.my-page
                         ul  
                             li.page-item

@@ -30,7 +30,7 @@ function showAlbum(img, tt, ct){
         var pic = document.createElement("img");
         pic.classList.add("d-block")
         pic.classList.add("w-100");
-        pic.src = listImage[i];
+        pic.src = "/" + listImage[i];
         div.appendChild(pic)
         slide.appendChild(div);
     }
