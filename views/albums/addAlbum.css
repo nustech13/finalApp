@@ -1,5 +1,5 @@
 section div.container-add{
-    height: calc(100vh - 90px);
+    min-height: calc(100vh - 90px);
     justify-content: flex-start;
 }
 section div.container-add form{
@@ -59,18 +59,24 @@ div.center div.right textarea{
     border-radius: 5px;
     padding: 0 10px;
 }
-div.center div.left div.image>input{
+div.image>input{
     display: none;
 }
-div.center div.left div.image label img{
-    margin: 30px 10px 30px 0;
+div.image label{
     width: 250px;
     height: 250px;
+    margin: 30px 10px 30px 10px;
+}
+div.image label img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;      
 }
 div.bottom{
     display: flex;
     justify-content: left;
     width: 100%;
+    align-items: center;
 }
 div.bottom button{
     margin-left: 20px;
@@ -82,9 +88,22 @@ div.bottom button{
     color: #fff;
     font-weight: 600;
     transition: all 0.3s linear;
+    margin-bottom: 20px;
 }
 div.bottom button:hover{
     background-color: #fff;
     color: #111;
 }
-
+div.bottom span.mess{
+    margin-left: 30px;
+    color: rgb(33, 211, 42);
+    font-weight: 600;
+}
+div.bottom span.error{
+    color: red;
+}
+div.image-albums{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}

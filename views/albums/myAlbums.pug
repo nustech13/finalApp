@@ -31,16 +31,17 @@ html
                         each album in albums
                             div.card-my-photo 
                                 div.my-image.album-image
-                                    img(src= album.images[0], alt="" 
-                                        onclick=`showAlbum(\"${album.images.toString()}\", \"${album.title}\", \"${album.content}\")`).album.pic1
-                                    img(src= album.images[0], alt="" 
+                                    img(src= `/${album.images[0]}`, alt="" 
+                                        onclick=`showAlbum(\"${album.images.toString()}\", \"${album.title}\", \"${album.description}\")`).album.pic1
+                                    img(src= `/${album.images[0]}`, alt="" 
                                         onclick="").album.pic2
-                                    img(src= album.images[0], alt="" 
+                                    img(src= `/${album.images[0]}`, alt="" 
                                         onclick="").album.pic3
                                     div.my-title
                                         span= album.title   
                                         i.fas.fa-edit
-                                    i.fas.fa-lock
+                                    if !album.isPublic
+                                        i.fas.fa-lock
                     div.page.my-page
                         ul  
                             li.page-item

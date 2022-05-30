@@ -9,6 +9,8 @@ html
         style
             include ../feeds/feeds.css
             include ../albums/addAlbum.css
+        script 
+            include ./addPhoto.js
     body
         div.container-fluid
             include ../nav/nav.pug  
@@ -22,29 +24,30 @@ html
                         li 
                             a(href="/albums") My Albums
                 div.container.container-add
-                    form
+                    form(action="/photos/add", method="POST", enctype="multipart/form-data")
                         div.top
                             h4 New Photo
                             a(href="/photos" type="button") Back   
                         div.center
                             div.left
                                 div.title
-                                    label(for="") Title
-                                    input(type="text", name="", maxlength="10") 
+                                    label(for="title") Title
+                                    input(type="text", name="title", value=req.title) 
                                 div.lock
-                                    label(for="") Sharing mode
-                                    select(name="")
+                                    label(for="isPublic") Sharing mode
+                                    select(name="isPublic")
                                         option(value="true") Public
                                         option(value="false") Private
-                                div.image
-                                    label(for="file-input") 
-                                        img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")
-                                    input#file-input(type="file", accept="image/*")
                             div.right
-                                label(for="") Description
-                                textarea(name="", cols="30", rows="4")      
+                                label(for="description") Description
+                                textarea(name="description", cols="30", rows="4")=req.description 
+                        div.image
+                            label(for="image") 
+                                img.upload-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")
+                            input#image(type="file", name="image", accept="image/*", onchange="setImage(this)")     
                         div.bottom
-                            button Save
+                            button(type="submit") Save
+                            span.mess(class= error)=mess
 
 
                     
