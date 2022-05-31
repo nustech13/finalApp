@@ -44,20 +44,3 @@ div.show-photo div.photo-shadow-box{
 div.show-photo-active{
     display: block;
 }
-.slide{
-    position: relative;
-}
-.slide .length-album{
-    width: 40px;
-    height: 30px;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 30px;
-    right: 20px;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    z-index: 1005;
-}

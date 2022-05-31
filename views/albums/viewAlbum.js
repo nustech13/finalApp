@@ -1,22 +1,22 @@
 function closeAlbum(){
-    var b = document.getElementsByClassName("show-photo")[0];
+    var b = document.getElementsByClassName("show-album")[0];
     var innerRemove = document.getElementsByClassName("carousel-inner")[0];
     var slide = document.getElementsByClassName("slide")[0];
     slide.removeChild(innerRemove);
     var inner = document.createElement("div");
     inner.classList.add("carousel-inner");
     slide.appendChild(inner);
-    b.classList.remove("show-photo-active");
+    b.classList.remove("show-album-active");
 }
 function showAlbum(img, tt, ct){
     var slide = document.getElementsByClassName("carousel-inner")[0];
     var height = document.getElementsByClassName("wrapper")[0];
-    var photoShow = document.getElementsByClassName("show-photo")[0];
-    var title = document.getElementsByClassName("photo-title-image")[0];
+    var photoShow = document.getElementsByClassName("show-album")[0];
+    var title = document.getElementsByClassName("album-title-image")[0];
     var length = document.getElementsByClassName("length-album")[0];
-    var content = document.getElementsByClassName("photo-content-image")[0];
+    var content = document.getElementsByClassName("album-content-image")[0];
     var listImage = img.split(",");
-    photoShow.classList.add("show-photo-active");
+    photoShow.classList.add("show-album-active");
     photoShow.style.height = (height.clientHeight+100) + 'px';
     title.innerHTML = tt;
     content.innerHTML = ct;

@@ -69,11 +69,11 @@ section div.container{
     background-color: #fff;
     width: 1340px;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     margin-top: 10px;
     margin-bottom: 10px;
+    min-height: calc(100vh - 90px);
 }
 div.choice {
     margin: 30px 0 20px 0;
@@ -202,9 +202,10 @@ div.card-photo div.content div.like span{
 }
 div.list-card {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
     flex-direction: row;
+    margin-left: 5px;
 }
 
 div.page ul{
