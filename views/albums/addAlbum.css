@@ -63,8 +63,8 @@ div.image>input{
     display: none;
 }
 div.image label{
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     margin: 30px 10px 30px 10px;
 }
 div.image label img{
