@@ -34,6 +34,14 @@ function showAlbum(img, tt, ct){
         div.appendChild(pic)
         slide.appendChild(div);
     }
+};
+function pre(){
+    var query = window.location.search.substring(1);
+    var page = parseInt(query.charAt(query.length-1)) - 1;
+    window.location.assign("/albums?page=" + page);
 }
-;
-
+function next(){
+    var query = window.location.search.substring(1);
+    var page = parseInt(query.charAt(query.length-1)) + 1;
+    window.location.assign("/albums?page=" + page);
+}
