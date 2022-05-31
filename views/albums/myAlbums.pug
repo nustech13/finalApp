@@ -21,7 +21,7 @@ html
                         li 
                             a(href="/feeds") Feeds
                         li 
-                            a(href="/photos") My Photos
+                            a(href="/photos?page=1") My Photos
                         li 
                             a(href="/albums").active My Albums
                 div.container.container-my-photo.boxed-photo
@@ -33,9 +33,9 @@ html
                                 div.my-image.album-image
                                     img(src= `/${album.images[0]}`, alt="" 
                                         onclick=`showAlbum(\"${album.images.toString()}\", \"${album.title}\", \"${album.description}\")`).album.pic1
-                                    img(src= `/${album.images[0]}`, alt="" 
+                                    img(src= `/${album.images[1] ? album.images[1] : album.images[0]}`, alt="" 
                                         onclick="").album.pic2
-                                    img(src= `/${album.images[0]}`, alt="" 
+                                    img(src= `/${album.images[2] ? album.images[2] : album.images[0]}`, alt="" 
                                         onclick="").album.pic3
                                     div.my-title
                                         span= album.title   
@@ -44,16 +44,21 @@ html
                                         i.fas.fa-lock
                     div.page.my-page
                         ul  
-                            li.page-item
-                                a(href="#").page-link.active Previous
-                            li.page-item
-                                a(href="#").page-link 1
-                            li.page-item
-                                a(href="#").page-link 2
-                            li.page-item
-                                a(href="#").page-link 3
-                            li.page-item
-                                a(href="#").page-link Next                  
+                            if preCheck 
+                                li.page-item
+                                    a.page-link.page-disable Previous
+                            else 
+                                li.page-item
+                                    a(onclick="pre()").page-link.pre-link Previous
+                            each pageActive in pageActives
+                                li.page-item
+                                    a(href=`?page=${pageActive.page}`, class=pageActive.active).page-link=pageActive.page
+                            if nextCheck
+                                li.page-item
+                                    a.page-link.page-disable Next  
+                            else    
+                                li.page-item
+                                    a(onclick="next()").page-link.next-link Next                  
 
             footer
                 

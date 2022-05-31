@@ -78,7 +78,7 @@ div.bottom{
     width: 100%;
     align-items: center;
 }
-div.bottom button{
+div.bottom button, form.delete button{
     margin-left: 20px;
     border: 2px solid #111;
     width: 80px;
@@ -90,12 +90,12 @@ div.bottom button{
     transition: all 0.3s linear;
     margin-bottom: 20px;
 }
-div.bottom button:hover{
+div.bottom button:hover, form.delete button:hover{
     background-color: #fff;
     color: #111;
 }
 div.bottom span.mess{
-    margin-left: 30px;
+    margin-left: 110px;
     color: rgb(33, 211, 42);
     font-weight: 600;
 }
@@ -106,4 +106,9 @@ div.image-albums{
     display: flex;
     justify-content: left;
     flex-wrap: wrap;
+}
+form.delete button{
+    position: relative;
+    top: -60px;
+    left: 100px;
 }

@@ -14,4 +14,13 @@ function showPhoto(img, tt, ct){
     title.innerHTML = tt;
     content.innerHTML = ct;
 }
-
+function pre(){
+    var query = window.location.search.substring(1);
+    var page = parseInt(query.charAt(query.length-1)) - 1;
+    window.location.assign("/photos?page=" + page);
+}
+function next(){
+    var query = window.location.search.substring(1);
+    var page = parseInt(query.charAt(query.length-1)) + 1;
+    window.location.assign("/photos?page=" + page);
+}

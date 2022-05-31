@@ -230,8 +230,13 @@ div.page ul li.page-item a.page-link{
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    color: #3B5998;
 }
-div.page ul li.page-item a.active{
+div.page ul li.page-item a.page-active{
+    color: red;
+}
+div.page ul li.page-item a.page-disable{
     color: gray;
 }
 div.category{
@@ -258,6 +263,10 @@ div.category ul li a:hover{
 input:focus,
 select:focus,
 textarea:focus,
-button:focus {
+button:focus {  
     outline: none;
+}
+.container-404{
+    min-height: calc(100vh - 90px);
+    background-color: #E9FF6F !important;
 }

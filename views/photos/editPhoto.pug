@@ -5,12 +5,10 @@ html
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
         link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
-        title Add Photo
+        title Edit Photo
         style
             include ../feeds/feeds.css
             include ../albums/addAlbum.css
-        script 
-            include ./addPhoto.js
     body
         div.container-fluid
             include ../nav/nav.pug  
@@ -24,33 +22,36 @@ html
                         li 
                             a(href="/albums") My Albums
                 div.container.container-add
-                    form(action="/photos/add", method="POST", enctype="multipart/form-data")
+                    form(action=`/photos/edit/62959068799e97a25f57c951`, method="POST", enctype="multipart/form-data")
                         div.top
-                            h4 New Photo
-                            a(onclick="window.history.back()", type="button") Back   
+                            h4 Edit Photo
+                            a(href="/photos" type="button") Back   
                         div.center
                             div.left
                                 div.title
                                     label(for="title") Title
-                                    input(type="text", name="title", value=req.title) 
+                                    input(type="text", name="title", value=photo.title) 
                                 div.lock
                                     label(for="isPublic") Sharing mode
                                     select(name="isPublic")
-                                        option(value="true") Public
-                                        option(value="false") Private
+                                        if photo.isPublic
+                                            option(value="true", selected) Public
+                                            option(value="false") Private
+                                        else
+                                            option(value="true") Public
+                                            option(value="false", selected) Private
                             div.right
                                 label(for="description") Description
-                                textarea(name="description", cols="30", rows="4")=req.description 
+                                textarea(name="description", cols="30", rows="4")=photo.description 
                         div.image
                             label(for="image") 
-                                img.upload-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")
-                            input#image(type="file", name="image", accept="image/*", onchange="setImage(this)")     
+                                img.upload-img(src=`\\${photo.image}`, alt="")
+                            input#image(type="file", name="image", accept="image/*", onchange="setImage(this)", value=photo.image)     
                         div.bottom
-                            button(type="submit") Save
+                            button(type="submit") Edit
                             span.mess(class= error)=mess
-
-
-                    
+                    form.delete(action=`/photos/delete/${photo._id}`, method="POST") 
+                        button Delete                
                                     
 
             footer

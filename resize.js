@@ -1,6 +1,6 @@
-import sharp from 'sharp';
-import { v4 as uuidv4 } from 'uuid';
-import path from 'path';
+import sharp from "sharp";
+import { v4 as uuidv4 } from "uuid";
+import path from "path";
 
 class Resize {
   constructor(folder) {
@@ -13,18 +13,18 @@ class Resize {
     await sharp(buffer)
       .resize(800, 400, {
         fit: sharp.fit.inside,
-        withoutEnlargement: true
+        withoutEnlargement: true,
       })
       .toFile(filepath);
-    
+
     return filename;
   }
   static filename() {
-     // random file name
+    // random file name
     return `${uuidv4()}.png`;
   }
   filepath(filename) {
-    return path.resolve(`${this.folder}/${filename}`)
+    return path.resolve(`${this.folder}/${filename}`);
   }
 }
 export default Resize;

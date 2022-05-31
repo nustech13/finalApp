@@ -11,12 +11,15 @@ const app = express();
 dotenv.config();
 const port = process.env.PORT || 3000;
 const URL = process.env.MONGODB_URL;
-app.use(express.static('public'));
-app.use(bodyParser.json({limit : '30mb'}));
-app.use(bodyParser.urlencoded({extended:true , limit : '30mb'}));
+app.use(express.static("public"));
+app.use(bodyParser.json({ limit: "30mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "/views"));
 routerConfig(app);
+app.get('*', function(req, res){
+  res.render("notFound404/notFound404");
+});
 mongoose
   .connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {

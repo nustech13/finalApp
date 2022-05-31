@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width')
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
+        link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
+        title 404 - Not Found
+        style
+            include ../feeds/feeds.css
+    body
+        div.container-fluid.wrapper
+            include ../nav/nav.pug  
+            section
+                div.category
+                    ul
+                        li 
+                            a(href="/feeds") Feeds
+                        li 
+                            a(href="/photos?page=1") My Photos
+                        li 
+                            a(href="/albums") My Albums
+                div.container.container-404
+                    img(src="https://mauwebsite.vn/wp-content/uploads/2021/10/loi-404.png", alt="")
+                
+            
