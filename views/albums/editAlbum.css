@@ -1,0 +1,22 @@
+div.container-add form.form-edit div.image-albums>label.label-picture{
+    position: relative;
+}
+div.container-add form.form-edit div.image-albums>label.label-picture::before{
+    content: "X";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    font-size: 100px;
+    color: white;
+    display: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+div.container-add form.form-edit div.image-albums>label.label-picture:hover::before{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

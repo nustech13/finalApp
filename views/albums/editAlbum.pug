@@ -1,0 +1,67 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width')
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
+        link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
+        title Edit Photo
+        style
+            include ../feeds/feeds.css
+            include ./addAlbum.css
+            include ./editAlbum.css
+        script 
+            include ./addAlbum.js
+            include ./editAlbum.js
+    body
+        div.container-fluid
+            include ../nav/nav.pug  
+            section
+                div.category
+                    ul
+                        li 
+                            a(href="/feeds/photos?page=1")  Feeds
+                        li 
+                            a(href="/photos?page=1") My Photos
+                        li 
+                            a(href="/albums") My Albums
+                div.container.container-add
+                    form.form-edit(action=`/albums/edit/${id}?_method=PUT`, method="POST", enctype="multipart/form-data")
+                        div.top
+                            h4 Edit Photo
+                            a(href="/albums" type="button") Back   
+                        div.center
+                            div.left
+                                div.title
+                                    label(for="title") Title
+                                    input.title-input(type="text", id="title", name="title", value=album.title, placeholder="Photo Title", required) 
+                                div.lock
+                                    label(for="isPublic") Sharing mode
+                                    select(name="isPublic")
+                                        if album.isPublic
+                                            option(value="true", selected) Public
+                                            option(value="false") Private
+                                        else
+                                            option(value="true") Public
+                                            option(value="false", selected) Private
+                            div.right
+                                label(for="description") Description
+                                textarea(name="description", cols="30", rows="4", placeholder="Photo Description", required)=album.description 
+                        div.image.image-albums
+                            each image in album.images
+                                label.label-picture(for="imageOld", onclick="removeImage(this)") 
+                                    img.upload-img(src=`\\${image}`, alt="")
+                                    input#imageOld(type="hidden", value=image, name="imageOld")
+                            label.label-upload(for="image") 
+                                img.upload-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")
+                            input#image(type="file", name="image", accept="image/*", onchange="setImageEdit(this)")     
+                        div.bottom
+                            button(type="submit") Edit
+                            span.mess(class= error)=mess
+                    form.delete(action=`/albums/delete/${id}?_method=DELETE`, method="POST") 
+                        button Delete                
+                                    
+
+            footer
+                
+            

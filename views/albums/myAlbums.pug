@@ -38,8 +38,9 @@ html
                                     img(src= `/${album.images[2] ? album.images[2] : album.images[0]}`, alt="" 
                                         onclick="").album.pic3
                                     div.my-title
-                                        span= album.title   
-                                        i.fas.fa-edit
+                                        span= album.title
+                                        a(href="/albums/edit/" + album._id)   
+                                            i.fas.fa-edit
                                     if !album.isPublic
                                         i.fas.fa-lock
                     div.page.my-page
