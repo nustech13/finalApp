@@ -2,6 +2,7 @@ import { albumModel } from "../model/albumModel.js";
 import Resize from "../resize.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export const albumController = {
@@ -109,6 +110,70 @@ export const albumController = {
         preCheck: preCheck,
         nextCheck: nextCheck,
       });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  getA: async (req, res) => {
+    try {
+      const album = await albumModel.findById(req.params.id);
+      return res.status(200).render("albums/editAlbum", {
+        album: album,
+        id: req.params.id,
+      });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  update: async (req, res) => {
+    try {
+      const album = await albumModel.findById(req.params.id);
+      if (req.body.title.length > 140) {
+        res.status(201).render("albums/editAlbum", {
+          mess: "Title maximum 140 characters long",
+          error: "error",
+          album: album,
+        });
+      } else if (req.body.description.length > 300) {
+        res.status(201).render("albums/editAlbum", {
+          mess: "Description maximum 300 characters long",
+          error: "error",
+          album: album,
+        });
+      }
+      else if (!req.body.imageOld) {
+        return res.status(201).render("albums/editAlbum", {
+          mess: "Must have at least an image",
+          error: "error",
+          album: album,
+        });
+      } else if (!req.file) {
+        if (req.body.imageOld == album.images) {
+          await album.updateOne({ $set: req.body });
+          return res.status(201).render("albums/editAlbum", {
+            mess: "Update Successfully!!!",
+            album: await albumModel.findById(req.params.id),
+          });
+        } else {
+          
+          for (const item of album.images) {
+            if(!req.body.imageOld.includes(item)){
+              fs.unlinkSync(`public/${item}`);
+            };
+          }
+          const albumUpdate = {
+            title: req.title,
+            description: req.description,
+            isPublic: req.isPublic,
+            images: req.body.imageOld
+          };
+          await album.updateOne({ $set: albumUpdate});
+          return res.status(201).render("albums/editAlbum", {
+            mess: "Update Successfully!!!",
+            album: await albumModel.findById(req.params.id),
+          });
+        }
+      }
     } catch (error) {
       res.status(500).json(error);
     }
