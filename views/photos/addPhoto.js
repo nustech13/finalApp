@@ -6,4 +6,3 @@ function setImage(inputFile){
         image.src = event.target.result;
     }
 }
-

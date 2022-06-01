@@ -1,6 +1,6 @@
 import { albumModel } from "../model/albumModel.js";
 import { photoModel } from "../model/photoModel.js";
-
+import dateFormat from "dateformat";
 export const feedController = {
   getAllPhoto: async (req, res) => {
     const page = parseInt(req.query.page);
@@ -17,10 +17,17 @@ export const feedController = {
       if (!page) {
         return res.status(200).redirect("/feeds/photos?page=1");
       }
-      result.photos = await photoModel.find({isPublic: true});
+      result.photos = await photoModel.find({ isPublic: true });
       result.numberOfResult = result.photos.length;
-      result.photos = await photoModel.find({isPublic: true}).limit(pageSize).skip(skipIndex);
+      result.photos = await photoModel
+        .find({ isPublic: true })
+        .sort({createdAt: 1})
+        .limit(pageSize)
+        .skip(skipIndex);
       result.offset = skipIndex;
+      for (const photo of result.photos) {
+        photo.day = dateFormat(photo.createdAt, "h:MM tt dd/mm/yyyy");
+      }
       const maxPage = Math.ceil(result.numberOfResult / pageSize);
       if (page > maxPage) {
         return res.status(200).redirect("/feeds/photos?page=1");
@@ -58,7 +65,7 @@ export const feedController = {
         ];
       }
       return res.status(200).render("feeds/feeds", {
-        photos: result.photos,
+        photos: result.photos.reverse(),
         pageActives: pageActives,
         preCheck: preCheck,
         nextCheck: nextCheck,
@@ -83,10 +90,16 @@ export const feedController = {
       if (!page) {
         return res.status(200).redirect("/feeds/albums?page=1");
       }
-      result.albums = await albumModel.find({isPublic: true});
+      result.albums = await albumModel.find({ isPublic: true });
       result.numberOfResult = result.albums.length;
-      result.albums = await albumModel.find({isPublic: true}).limit(pageSize).skip(skipIndex);
+      result.albums = await albumModel
+        .find({ isPublic: true })
+        .limit(pageSize)
+        .skip(skipIndex);
       result.offset = skipIndex;
+      for (const album of result.albums) {
+        album.day = dateFormat(album.createdAt, "h:MM tt dd/mm/yyyy");
+      }
       const maxPage = Math.ceil(result.numberOfResult / pageSize);
       if (page > maxPage) {
         return res.status(200).redirect("/feeds/albums?page=1");

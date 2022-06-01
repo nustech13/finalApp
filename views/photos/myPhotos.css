@@ -6,7 +6,7 @@ div.container div.list-my-card {
     margin-top: 20px;
 }
 section div.container-my-photo{
-    height: calc(100vh - 90px);
+    min-height: calc(100vh - 90px);
     justify-content: flex-start;
 }
 div.container div.list-my-card div.card-my-photo{

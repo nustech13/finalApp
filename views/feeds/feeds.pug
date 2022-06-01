@@ -51,7 +51,7 @@ html
                                         div.like
                                             a(href="#") 
                                                 i.fas.fa-heart  123
-                                            span 4:56 pm 25/05/2022
+                                            span=album.day
                         else
                             each photo in photos    
                                 div.card-photo(onclick=`showPhoto("/${photo.image}", "${photo.title}", "${photo.description}")`) 
@@ -68,7 +68,7 @@ html
                                         div.like
                                             a(href="#") 
                                                 i.fas.fa-heart  123
-                                            span 4:56 pm 25/05/2022
+                                            span=photo.day
                     div.page
                         ul  
                             if preCheck 
