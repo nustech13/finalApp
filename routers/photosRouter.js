@@ -7,7 +7,7 @@ photosRouter.get("/add", (request, response) => {
   response.render("photos/addPhoto", { req: request.body });
 });
 photosRouter.post("/add", upload.single("image"), photoController.add);
-photosRouter.post("/edit/:id", upload.single("image"), photoController.update);
+photosRouter.put("/edit/:id", upload.single("image"), photoController.update);
 photosRouter.get("/edit/:id", photoController.getA);
-photosRouter.post("/delete/:id", photoController.delete);
+photosRouter.delete("/delete/:id", photoController.delete);
 export default photosRouter;

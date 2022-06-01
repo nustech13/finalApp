@@ -19,9 +19,13 @@ div.show-album div.photo-item{
     box-shadow: 4px 4px 5px #111;
     padding: 20px;
 }
+div.show-album div.photo-item div.photo-title{
+    width: 730px;
+}
 div.show-album div.photo-item div.photo-title span{
     font-size: 16px;
     font-weight: 600;
+    word-wrap: break-word;
 }
 div.show-album div.photo-item div.photo-image img{
     margin: 20px 0;

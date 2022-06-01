@@ -13,3 +13,5 @@ function setImage(inputFile) {
     };
   }
 }
+var title = document.getElementsByName('title');
+console.log(title);

@@ -32,7 +32,7 @@ html
                             div.left
                                 div.title
                                     label(for="title") Title
-                                    input(type="text", name="title", value=req.title) 
+                                    input(type="text", name="title", value=req.title, placeholder="Album Title", required) 
                                 div.lock
                                     label(for="isPublic") Sharing mode
                                     select(name="isPublic")
@@ -40,7 +40,7 @@ html
                                         option(value="false") Private
                             div.right
                                 label(for="description") Description
-                                textarea(name="description", cols="30", rows="4")=req.description       
+                                textarea(name="description", cols="30", rows="4", placeholder="Album Description", required)=req.description       
                         div.image.image-albums
                             label.label-upload(for="image") 
                                 img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")

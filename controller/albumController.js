@@ -7,9 +7,15 @@ const __dirname = path.dirname(__filename);
 export const albumController = {
   add: async (req, res) => {
     try {
-      if (!req.body.title) {
-        res.status(201).render("albums/addAlbum", {
-          mess: "Please provide an title",
+      if (req.body.title.length > 140) {
+        res.status(201).render("photos/addPhoto", {
+          mess: "Title maximum 140 characters long",
+          error: "error",
+          req: req.body,
+        });
+      } else if (req.body.description.length > 300) {
+        res.status(201).render("photos/addPhoto", {
+          mess: "Description maximum 300 characters long",
           error: "error",
           req: req.body,
         });
@@ -33,12 +39,10 @@ export const albumController = {
           isPublic: req.body.isPublic,
         });
         newAlbum.save();
-        return res
-          .status(200)
-          .render("albums/addAlbum", {
-            mess: "Add Successfully!!!",
-            req: req.body,
-          });
+        return res.status(200).render("albums/addAlbum", {
+          mess: "Add Successfully!!!",
+          req: req.body,
+        });
       }
     } catch (error) {
       res.status(500).json(error);
@@ -46,7 +50,7 @@ export const albumController = {
   },
   getAll: async (req, res) => {
     const page = parseInt(req.query.page);
-    const pageSize = 1;
+    const pageSize = 20;
     const skipIndex = (page - 1) * pageSize;
     const result = {
       albums: [],
@@ -56,7 +60,7 @@ export const albumController = {
     let pageActives = [];
     let preCheck = page === 1;
     try {
-      if(!page){
+      if (!page) {
         return res.status(200).redirect("/albums?page=1");
       }
       result.albums = await albumModel.find();
@@ -64,7 +68,7 @@ export const albumController = {
       result.albums = await albumModel.find().limit(pageSize).skip(skipIndex);
       result.offset = skipIndex;
       const maxPage = Math.ceil(result.numberOfResult / pageSize);
-      if(page > maxPage){
+      if (page > maxPage) {
         return res.status(200).redirect("/albums?page=1");
       }
       let nextCheck = page === maxPage;
@@ -79,13 +83,9 @@ export const albumController = {
           { page: 1, active: "page-active" },
           { page: 2, active: "" },
         ];
-      }
-      else if (page === 1 && maxPage === 1) {
-        pageActives = [
-          { page: 1, active: "page-active" },
-        ];
-      }
-      else if (page === 2 && maxPage < 3) {
+      } else if (page === 1 && maxPage === 1) {
+        pageActives = [{ page: 1, active: "page-active" }];
+      } else if (page === 2 && maxPage < 3) {
         pageActives = [
           { page: 1, active: "" },
           { page: 2, active: "page-active" },
@@ -103,14 +103,12 @@ export const albumController = {
           { page: maxPage, active: "page-active" },
         ];
       }
-      return res
-        .status(200)
-        .render("albums/myAlbums", {
-          albums: result.albums,
-          pageActives: pageActives,
-          preCheck: preCheck,
-          nextCheck: nextCheck,
-        })
+      return res.status(200).render("albums/myAlbums", {
+        albums: result.albums,
+        pageActives: pageActives,
+        preCheck: preCheck,
+        nextCheck: nextCheck,
+      });
     } catch (error) {
       res.status(500).json(error);
     }

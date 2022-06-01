@@ -27,12 +27,12 @@ html
                     form(action="/photos/add", method="POST", enctype="multipart/form-data")
                         div.top
                             h4 New Photo
-                            a(onclick="window.history.back()", type="button") Back   
+                            a(href="/photos", type="button") Back   
                         div.center
                             div.left
                                 div.title
                                     label(for="title") Title
-                                    input(type="text", name="title", value=req.title) 
+                                    input.title-input(type="text", name="title", value=req.title, placeholder="Photo Title", required) 
                                 div.lock
                                     label(for="isPublic") Sharing mode
                                     select(name="isPublic")
@@ -40,7 +40,7 @@ html
                                         option(value="false") Private
                             div.right
                                 label(for="description") Description
-                                textarea(name="description", cols="30", rows="4")=req.description 
+                                textarea(name="description", cols="30", rows="4", placeholder="Photo Description", required)=req.description 
                         div.image
                             label(for="image") 
                                 img.upload-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")

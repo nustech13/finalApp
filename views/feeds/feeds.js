@@ -8,3 +8,4 @@ function nextFeeds(cate){
     var page = parseInt(query.charAt(query.length-1)) + 1;
     window.location.assign(`${cate ? "albums" : "photos"}?page=${page}`);
 }
+
