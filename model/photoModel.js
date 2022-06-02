@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const photoSchema = new mongoose.Schema(
+const PhotoSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -25,4 +25,4 @@ const photoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const photoModel = mongoose.model("Photo", photoSchema);
+export const PhotoModel = mongoose.model("Photo", PhotoSchema);

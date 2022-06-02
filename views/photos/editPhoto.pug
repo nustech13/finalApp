@@ -24,7 +24,7 @@ html
                         li 
                             a(href="/albums") My Albums
                 div.container.container-add
-                    form(action=`/photos/edit/${id}?_method=PUT`, method="POST", enctype="multipart/form-data")
+                    form(action=`/photos/${id}?_method=PUT`, method="POST", enctype="multipart/form-data")
                         div.top
                             h4 Edit Photo
                             a(href="/photos" type="button") Back   
@@ -52,7 +52,7 @@ html
                         div.bottom
                             button(type="submit") Edit
                             span.mess(class= error)=mess
-                    form.delete(action=`/photos/delete/${id}?_method=DELETE`, method="POST") 
+                    form.delete(action=`/photos/${id}?_method=DELETE`, method="POST") 
                         button Delete                
                                     
 
