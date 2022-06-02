@@ -1,7 +1,7 @@
 
 form.signup-form{
     width: 500px;
-    height: 500px;
+    min-height: 500px;
     background-color: #E0E0E0;
     margin-top: 20px;
     border-radius: 10px;
@@ -13,6 +13,20 @@ form.signup-form{
 form.signup-form div.input-form{
     width: 80%;
     margin-top: 10px;
+}
+form.signup-form div.input-error{
+    background-color: rgb(206, 117, 139);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+form.signup-form div.input-error:first-child{
+    margin-top: 20px;
+    
+}
+form.signup-form div.input-error span{
+    margin-left: 10px;
 }
 section div.container form.signup-form button{
     border: 1px solid #111;

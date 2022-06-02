@@ -1,7 +1,8 @@
-import { albumModel } from "../model/albumModel.js";
-import { photoModel } from "../model/photoModel.js";
+import { AlbumModel } from "../model/albumModel.js";
+import { PhotoModel } from "../model/photoModel.js";
+import { paging } from "./albumController.js";
 import dateFormat from "dateformat";
-export const feedController = {
+export const FeedController = {
   getAllPhoto: async (req, res) => {
     const page = parseInt(req.query.page);
     const pageSize = 6;
@@ -17,11 +18,10 @@ export const feedController = {
       if (!page) {
         return res.status(200).redirect("/feeds/photos?page=1");
       }
-      result.photos = await photoModel.find({ isPublic: true });
+      result.photos = await PhotoModel.find({ isPublic: true });
       result.numberOfResult = result.photos.length;
-      result.photos = await photoModel
-        .find({ isPublic: true })
-        .sort({createdAt: 1})
+      result.photos = await PhotoModel.find({ isPublic: true })
+        .sort({ createdAt: 1 })
         .limit(pageSize)
         .skip(skipIndex);
       result.offset = skipIndex;
@@ -33,40 +33,9 @@ export const feedController = {
         return res.status(200).redirect("/feeds/photos?page=1");
       }
       let nextCheck = page === maxPage;
-      if (page === 1 && maxPage > 2) {
-        pageActives = [
-          { page: 1, active: "page-active" },
-          { page: 2, active: "" },
-          { page: 3, active: "" },
-        ];
-      } else if (page === 1 && maxPage === 2) {
-        pageActives = [
-          { page: 1, active: "page-active" },
-          { page: 2, active: "" },
-        ];
-      } else if (page === 1 && maxPage === 1) {
-        pageActives = [{ page: 1, active: "page-active" }];
-      } else if (page === 2 && maxPage < 3) {
-        pageActives = [
-          { page: 1, active: "" },
-          { page: 2, active: "page-active" },
-        ];
-      } else if (page > 1 && page < maxPage) {
-        pageActives = [
-          { page: page - 1, active: "" },
-          { page: page, active: "page-active" },
-          { page: page + 1, active: "" },
-        ];
-      } else {
-        pageActives = [
-          { page: maxPage - 2, active: "" },
-          { page: maxPage - 1, active: "" },
-          { page: maxPage, active: "page-active" },
-        ];
-      }
       return res.status(200).render("feeds/feeds", {
         photos: result.photos.reverse(),
-        pageActives: pageActives,
+        pageActives: paging(page, maxPage),
         preCheck: preCheck,
         nextCheck: nextCheck,
         checkAlbum: false,
@@ -90,10 +59,9 @@ export const feedController = {
       if (!page) {
         return res.status(200).redirect("/feeds/albums?page=1");
       }
-      result.albums = await albumModel.find({ isPublic: true });
+      result.albums = await AlbumModel.find({ isPublic: true });
       result.numberOfResult = result.albums.length;
-      result.albums = await albumModel
-        .find({ isPublic: true })
+      result.albums = await AlbumModel.find({ isPublic: true })
         .limit(pageSize)
         .skip(skipIndex);
       result.offset = skipIndex;
@@ -138,7 +106,7 @@ export const feedController = {
       }
       return res.status(200).render("feeds/feeds", {
         albums: result.albums,
-        pageActives: pageActives,
+        pageActives: paging(page, maxPage),
         preCheck: preCheck,
         nextCheck: nextCheck,
         checkAlbum: true,

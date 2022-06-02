@@ -1,10 +1,10 @@
 import express from "express";
-import { feedController } from "../controller/feedController.js";
+import { FeedController } from "../controller/feedController.js";
 const feedRouter = express.Router();
 feedRouter.get("/", (req, res)=>{
     res.redirect("/feeds/photos");
 });
-feedRouter.get("/albums", feedController.getAllAlbum);
-feedRouter.get("/photos", feedController.getAllPhoto);
+feedRouter.get("/albums", FeedController.getAllAlbum);
+feedRouter.get("/photos", FeedController.getAllPhoto);
 
 export default feedRouter;

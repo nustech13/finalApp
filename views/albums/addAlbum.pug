@@ -24,7 +24,7 @@ html
                         li 
                             a(href="/albums") My Albums
                 div.container.container-add
-                    form(action="/albums/add", method="POST", enctype="multipart/form-data")
+                    form(action="/albums/", method="POST", enctype="multipart/form-data")
                         div.top
                             h4 New Album 
                             a(href="/albums" type="button") Back   
@@ -47,11 +47,4 @@ html
                             input#image(type="file", accept="image/*", name="image", multiple, onchange="setImage(this)")
                         div.bottom
                             button(type="submit") Save
-                            span.mess(class= error)=mess
-
-                    
-                                    
-
-            footer
-                
-            
+                            span.mess(class= error)=mess   

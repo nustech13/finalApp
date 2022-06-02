@@ -1,17 +1,33 @@
 import express from "express";
+import passport from "passport";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import logger from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import routerConfig from "./config/routerConfig.js";
 import mongoose from "mongoose";
+import flash from "connect-flash";
 import bodyParser from "body-parser";
 import methodOverride from "method-override";
+import "./config/passport.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 dotenv.config();
 const port = process.env.PORT || 3000;
 const URI = process.env.MONGODB_URL;
+app.use(session({
+  secret: 'adsa897adsa98bs',
+  resave: false,
+  saveUninitialized: false,
+}))
+app.use(passport.initialize())
+app.use(passport.session());
+app.use(flash());
+app.use(logger('dev'));
+app.use(cookieParser());
 app.use(express.static("public"));
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));

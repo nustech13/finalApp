@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-
-const userSchema = new mongoose.Schema(
+import bcrypt from "bcrypt-nodejs";
+const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -18,5 +18,10 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-export const userModel = mongoose.model("User", userSchema);
+UserSchema.methods.encryptPassword= function(password){
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(5),null);
+};
+UserSchema.methods.validPassword = function(password){
+  return bcrypt.compareSync(password, this.password);
+};
+export const UserModel = mongoose.model("User", UserSchema);
