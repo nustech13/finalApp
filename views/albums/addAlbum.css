@@ -111,4 +111,5 @@ form.delete button{
     position: relative;
     top: -60px;
     left: 100px;
+    background-color: red;
 }

@@ -3,15 +3,16 @@ import Resize from "../resize.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import { paging } from "./albumController.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const MAX_LENGTH_TITLE = 140;
 const MAX_LENGTH_DESCRIPTION = 300;
-const handleError = (res, path, mess, body) => {
+export const handleError = (res, path, mess, body, bodyName) => {
   res.status(400).render(path, {
     mess: mess,
     error: "error",
-    photo: body,
+    [bodyName]: body,
   });
 };
 export const PhotoController = {
@@ -23,7 +24,8 @@ export const PhotoController = {
           res,
           "photos/addPhoto",
           "Title maximum 140 characters long",
-          req.body
+          req.body,
+          "photo"
         );
       }
       if (req.body.description.length > MAX_LENGTH_DESCRIPTION) {
@@ -31,7 +33,8 @@ export const PhotoController = {
           res,
           "photos/addPhoto",
           "Description maximum 300 characters long",
-          req.body
+          req.body,
+          "photo"
         );
       }
       if (!req.file) {
@@ -39,7 +42,8 @@ export const PhotoController = {
           res,
           "photos/addPhoto",
           "Please provide an image",
-          req.body
+          req.body,
+          "photo"
         );
       }
       const imagePath = path.join(__dirname, "../public/images");
@@ -70,10 +74,7 @@ export const PhotoController = {
     const result = {
       photos: [],
       numberOfResult: "",
-      offset: "",
     };
-    let pageActives = [];
-    let preCheck = page === 1;
     try {
       if (!page) {
         return res.status(200).redirect("/photos?page=1");
@@ -81,54 +82,23 @@ export const PhotoController = {
       result.photos = await PhotoModel.find();
       result.numberOfResult = result.photos.length;
       result.photos = await PhotoModel.find().limit(pageSize).skip(skipIndex);
-      result.offset = skipIndex;
       const maxPage = Math.ceil(result.numberOfResult / pageSize);
       if (page > maxPage) {
         return res.status(200).redirect("/photos?page=1");
       }
+      let preCheck = page === 1;
       let nextCheck = page === maxPage;
-      if (page === 1 && maxPage > 2) {
-        pageActives = [
-          { page: 1, active: "page-active" },
-          { page: 2, active: "" },
-          { page: 3, active: "" },
-        ];
-      } else if (page === 1 && maxPage === 2) {
-        pageActives = [
-          { page: 1, active: "page-active" },
-          { page: 2, active: "" },
-        ];
-      } else if (page === 1 && maxPage === 1) {
-        pageActives = [{ page: 1, active: "page-active" }];
-      } else if (page === 2 && maxPage < 3) {
-        pageActives = [
-          { page: 1, active: "" },
-          { page: 2, active: "page-active" },
-        ];
-      } else if (page > 1 && page < maxPage) {
-        pageActives = [
-          { page: page - 1, active: "" },
-          { page: page, active: "page-active" },
-          { page: page + 1, active: "" },
-        ];
-      } else {
-        pageActives = [
-          { page: maxPage - 2, active: "" },
-          { page: maxPage - 1, active: "" },
-          { page: maxPage, active: "page-active" },
-        ];
-      }
       return res.status(200).render("photos/myPhotos", {
         photos: result.photos,
-        pageActives: pageActives,
+        pageActives: paging(page, maxPage),
         preCheck: preCheck,
         nextCheck: nextCheck,
       });
     } catch (error) {
-      res.status(500).json(error);
+      res.status(400).json(error);
     }
   },
-  getA: async (req, res) => {
+  getViewEdit: async (req, res) => {
     try {
       const photo = await PhotoModel.findById(req.params.id);
       return res.status(200).render("photos/editPhoto", {
@@ -136,7 +106,7 @@ export const PhotoController = {
         id: req.params.id,
       });
     } catch (error) {
-      res.status(500).json(error);
+      res.status(400).json(error);
     }
   },
   update: async (req, res) => {
@@ -148,7 +118,8 @@ export const PhotoController = {
           res,
           "photos/editPhoto",
           "Title maximum 140 characters long",
-          req.body
+          photo,
+          "photo"
         );
       }
       if (req.body.description.length > MAX_LENGTH_DESCRIPTION) {
@@ -156,7 +127,8 @@ export const PhotoController = {
           res,
           "photos/editPhoto",
           "Description maximum 300 characters long",
-          req.body
+          photo,
+          "photo"
         );
       }
       if (!req.file) {
@@ -187,12 +159,15 @@ export const PhotoController = {
   },
   delete: async (req, res) => {
     try {
-      const photo = await PhotoModel.findById(req.params.id);
-      fs.unlinkSync(`public/${photo.image}`);
-      await PhotoModel.findByIdAndDelete(req.params.id);
-      return res.redirect("/photos");
+      if (req.body.isDelete == "true") {
+        const photo = await PhotoModel.findById(req.params.id);
+        fs.unlinkSync(`public/${photo.image}`);
+        await PhotoModel.findByIdAndDelete(req.params.id);
+        return res.redirect("/photos");
+      }
+      return res.status(400).render("photos/editPhoto", {photo: await PhotoModel.findById(req.params.id)});
     } catch (error) {
-      res.status(500).json(error);
+      res.status(400).json(error);
     }
   },
 };

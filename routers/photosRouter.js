@@ -8,6 +8,6 @@ photosRouter.get("/new", (req, res) => {
 });
 photosRouter.post("/", upload.single("image"), PhotoController.add);
 photosRouter.put("/:id", upload.single("image"), PhotoController.update);
-photosRouter.get("/edit/:id", PhotoController.getA);
+photosRouter.get("/edit/:id", PhotoController.getViewEdit);
 photosRouter.delete("/:id", PhotoController.delete);
 export default photosRouter;

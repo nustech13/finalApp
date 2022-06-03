@@ -1,7 +1,7 @@
 div.container-add form.form-edit div.image-albums>label.label-picture{
     position: relative;
 }
-div.container-add form.form-edit div.image-albums>label.label-picture::before{
+div.container-add form.form-edit div.image-albums>label.label-picture-old::before{
     content: "X";
     position: absolute;
     top: 0;
@@ -15,7 +15,7 @@ div.container-add form.form-edit div.image-albums>label.label-picture::before{
     cursor: pointer;
     border-radius: 5px;
 }
-div.container-add form.form-edit div.image-albums>label.label-picture:hover::before{
+div.container-add form.form-edit div.image-albums>label.label-picture-old:hover::before{
     display: flex;
     justify-content: center;
     align-items: center;
