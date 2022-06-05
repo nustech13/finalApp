@@ -2,9 +2,16 @@ import express from "express";
 import { PhotoController } from "../controller/photoController.js";
 import upload from "../middleware/uploadMiddleware.js";
 const photosRouter = express.Router();
+photosRouter.use("*", (req, res, next)=>{
+  if (!req.session.passport) {
+    res.redirect("/auth/signin");
+  }else{
+    next();
+  }
+})
 photosRouter.get("/", PhotoController.getAll);
 photosRouter.get("/new", (req, res) => {
-  res.render("photos/addPhoto", { photo: req.body });
+  res.render("photos/addPhoto", { photo: req.body, user: req.user });
 });
 photosRouter.post("/", upload.single("image"), PhotoController.add);
 photosRouter.put("/:id", upload.single("image"), PhotoController.update);

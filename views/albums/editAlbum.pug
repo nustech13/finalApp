@@ -20,9 +20,9 @@ html
                 div.category
                     ul
                         li 
-                            a(href="/feeds/photos?page=1")  Feeds
+                            a(href="/feeds/photos")  Feeds
                         li 
-                            a(href="/photos?page=1") My Photos
+                            a(href="/photos") My Photos
                         li 
                             a(href="/albums") My Albums
                 div.container.container-add
@@ -56,8 +56,8 @@ html
                                 img.upload-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")
                             input#image(type="file", name="image", accept="image/*", multiple, onchange="setImageEdit(this)")     
                         div.bottom
-                            button(type="submit") Edit
-                            span.mess(class= error)=mess
+                            button.btn-album(type="submit") Edit
+                            span.mess.mess-album(class= error)=mess
                     form.delete(action=`/albums/${album._id}?_method=DELETE`, method="POST") 
                         input.input-delete-album(type="hidden", value="", name="isDelete")
                         button(onclick="checkDelete()") Delete

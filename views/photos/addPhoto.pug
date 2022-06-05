@@ -18,9 +18,9 @@ html
                 div.category
                     ul
                         li 
-                            a(href="/feeds/photos?page=1")  Feeds
+                            a(href="/feeds/photos")  Feeds
                         li 
-                            a(href="/photos?page=1") My Photos
+                            a(href="/photos") My Photos
                         li 
                             a(href="/albums") My Albums
                 div.container.container-add
@@ -46,8 +46,8 @@ html
                                 img.upload-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYNrBBoQAA9dt1Cj6UOhSb_gw5_IQQmBbpdw&usqp=CAU", alt="")
                             input#image(type="file", name="image", accept="image/*", onchange="setImage(this)")     
                         div.bottom
-                            button(type="submit") Save
-                            span.mess(class= error)=mess
+                            button.btn-photo(type="submit") Save
+                            span.mess.mess-photo(class= error)=mess
 
 
                     
