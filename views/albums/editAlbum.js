@@ -13,10 +13,13 @@ window.addEventListener("load", function(event) {
   }
 });
 function setImageEdit(inputFile) {
+  var button = document.getElementsByClassName("btn-album")[0];
+  var span = document.getElementsByClassName("mess-album")[0];
   if (albumOldLength + inputFile.files.length <= 25) {
     var listImage = document.getElementsByClassName("image-albums")[0];
     var labelUpload = document.getElementsByClassName("label-upload")[0];
     var check = true;
+    button.disabled = false;
     for (const item of inputFile.files) {
       if (item.size > 5 * 1024 * 1024) {
         check = false;
@@ -37,10 +40,16 @@ function setImageEdit(inputFile) {
       }
       labelUpload.style.display = "none";
     }else{
-      alert("Maximun size photo is 5MB!");
+      alert("Maximum size photo is 5MB!");
+      button.disabled = true;
+      span.innerHTML = "Please choose photo under 5MB!";
+      span.classList.add("error");
     }
   } else {
     alert("Maximun 25 photos in album!");
+    button.disabled = true;
+    span.innerHTML = "Please choose maximum 25 photos";
+    span.classList.add("error");
   }
 }
 function checkDelete() {

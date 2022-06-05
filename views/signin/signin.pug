@@ -8,17 +8,17 @@ html
         title Login
         style
             include ../feeds/feeds.css
-            include ./login.css
+            include ./signin.css
     body
         div.container-fluid.container-login   
             include ../nav/nav.pug
             section
                 div.container 
                     h1.login Fotobook Login
-                    form(action="/auth/login" method="POST").login-form
+                    form(action="/auth/signin" method="POST").login-form
                         img(src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120", alt="")
-                        input(type="text", placeholder="Email" required).email-login.form-control
-                        input(type="password", placeholder="Password" required).password-login.form-control
+                        input(type="text", name="email", placeholder="Email" required).email-login.form-control
+                        input(type="password", name="password", placeholder="Password" required).password-login.form-control
                         button(type="submit").btn Login
                         a(href="#").login-link Forgot password?
                     a(href="/auth/signup").login-link Create a account!

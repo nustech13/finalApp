@@ -9,7 +9,7 @@ html
         style
             include ../feeds/feeds.css
             include ./signup.css
-            include ../login/login.css
+            include ../signin/signin.css
     body
         div.container-fluid.container-login   
             include ../nav/nav.pug
@@ -35,7 +35,7 @@ html
                             input#password(type="password", placeholder="Password", name="password" required).form-control
                         div.input-form
                             label(for="confirm-password") Password Confimnation
-                            input#confirm-password(type="password", placeholder="Password", name="confirm-password" required).form-control
+                            input#confirm-password(type="password", placeholder="Password", name="confirmPassword" required).form-control
                         button(type="submit").btn Signup
                         
 

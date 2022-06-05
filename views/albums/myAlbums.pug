@@ -19,30 +19,31 @@ html
                 div.category
                     ul
                         li 
-                            a(href="/feeds/photos?page=1")  Feeds
+                            a(href="/feeds/photos")  Feeds
                         li 
-                            a(href="/photos?page=1") My Photos
+                            a(href="/photos") My Photos
                         li 
                             a(href="/albums").active My Albums
                 div.container.container-my-photo.boxed-photo
                     div.btn-addNew
                         a.btn.btn-success(href="/albums/new") Add New Album
                     div.list-my-card 
-                        each album in albums
-                            div.card-my-photo 
-                                div.my-image.album-image
-                                    img(src= `/${album.images[0]}`, alt="" 
-                                        onclick=`showAlbum(\"${album.images.toString()}\", \"${album.title}\", \"${album.description}\")`).album.pic1
-                                    img(src= `/${album.images[1] ? album.images[1] : album.images[0]}`, alt="" 
-                                        onclick="").album.pic2
-                                    img(src= `/${album.images[2] ? album.images[2] : album.images[0]}`, alt="" 
-                                        onclick="").album.pic3
-                                    div.my-title
-                                        span= album.title
-                                        a(href="/albums/edit/" + album._id)   
-                                            i.fas.fa-edit
-                                    if !album.isPublic
-                                        i.fas.fa-lock
+                        if albums
+                            each album in albums
+                                div.card-my-photo 
+                                    div.my-image.album-image
+                                        img(src= `/${album.images[0]}`, alt="" 
+                                            onclick=`showAlbum(\"${album.images.toString()}\", \"${album.title}\", \"${album.description}\")`).album.pic1
+                                        img(src= `/${album.images[1] ? album.images[1] : album.images[0]}`, alt="" 
+                                            onclick="").album.pic2
+                                        img(src= `/${album.images[2] ? album.images[2] : album.images[0]}`, alt="" 
+                                            onclick="").album.pic3
+                                        div.my-title
+                                            span= album.title
+                                            a(href="/albums/edit/" + album._id)   
+                                                i.fas.fa-edit
+                                        if !album.isPublic
+                                            i.fas.fa-lock
                     div.page.my-page
                         ul  
                             if preCheck 

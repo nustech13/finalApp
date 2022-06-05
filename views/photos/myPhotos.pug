@@ -20,26 +20,27 @@ html
                 div.category
                     ul
                         li 
-                            a(href="/feeds/photos?page=1")  Feeds
+                            a(href="/feeds/photos")  Feeds
                         li 
-                            a(href="/photos?page=1").active My Photos
+                            a(href="/photos").active My Photos
                         li 
                             a(href="/albums") My Albums
                 div.container.container-my-photo.boxed-photo
                     div.btn-addNew
                         a(href="/photos/new").btn.btn-success Add New Photo
                     div.list-my-card 
-                        each photo in photos
-                            div.card-my-photo 
-                                div.my-image
-                                    img(src= photo.image, alt="" 
-                                        onclick=`showPhoto(\"${photo.image}\", \"${photo.title}\", \"${photo.description}\")`)
-                                    div.my-title
-                                        span= photo.title
-                                        a(href="/photos/edit/" + photo._id)
-                                            i.fas.fa-edit   
-                                    if !photo.isPublic
-                                        i.fas.fa-lock
+                        if photos
+                            each photo in photos
+                                div.card-my-photo 
+                                    div.my-image
+                                        img(src= photo.image, alt="" 
+                                            onclick=`showPhoto(\"${photo.image}\", \"${photo.title}\", \"${photo.description}\")`)
+                                        div.my-title
+                                            span= photo.title
+                                            a(href="/photos/edit/" + photo._id)
+                                                i.fas.fa-edit   
+                                        if !photo.isPublic
+                                            i.fas.fa-lock
                     div.page.my-page
                         ul  
                             if preCheck 

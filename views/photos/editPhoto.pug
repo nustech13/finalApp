@@ -19,9 +19,9 @@ html
                 div.category
                     ul
                         li 
-                            a(href="/feeds/photos?page=1")  Feeds
+                            a(href="/feeds/photos")  Feeds
                         li 
-                            a(href="/photos?page=1") My Photos
+                            a(href="/photos") My Photos
                         li 
                             a(href="/albums") My Albums
                 div.container.container-add
@@ -51,8 +51,8 @@ html
                                 img.upload-img(src=`\\${photo.image}`, alt="")
                             input#image(type="file", name="image", accept="image/*", onchange="setImage(this)", value=photo.image)     
                         div.bottom
-                            button(type="submit") Edit
-                            span.mess(class= error)=mess
+                            button.btn-photo(type="submit") Edit
+                            span.mess.mess-photo(class= error)=mess
                     form.delete(action=`/photos/${photo._id}?_method=DELETE`, method="POST") 
                         input.input-delete-photo(type="hidden", value="", name="isDelete")
                         button(onclick="checkDelete()") Delete                

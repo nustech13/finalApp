@@ -8,11 +8,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const MAX_LENGTH_TITLE = 140;
 const MAX_LENGTH_DESCRIPTION = 300;
-export const handleError = (res, path, mess, body, bodyName) => {
+export const handleError = (res, path, mess, body, bodyName, user) => {
   res.status(400).render(path, {
     mess: mess,
     error: "error",
     [bodyName]: body,
+    user: user
   });
 };
 export const PhotoController = {
@@ -25,7 +26,8 @@ export const PhotoController = {
           "photos/addPhoto",
           "Title maximum 140 characters long",
           req.body,
-          "photo"
+          "photo",
+          req.user
         );
       }
       if (req.body.description.length > MAX_LENGTH_DESCRIPTION) {
@@ -34,7 +36,8 @@ export const PhotoController = {
           "photos/addPhoto",
           "Description maximum 300 characters long",
           req.body,
-          "photo"
+          "photo",
+          req.user
         );
       }
       if (!req.file) {
@@ -43,7 +46,8 @@ export const PhotoController = {
           "photos/addPhoto",
           "Please provide an image",
           req.body,
-          "photo"
+          "photo",
+          req.user
         );
       }
       const imagePath = path.join(__dirname, "../public/images");
@@ -54,16 +58,19 @@ export const PhotoController = {
         description: description,
         image: "images/" + filename,
         isPublic: isPublic,
+        user: req.user._id
       });
       newPhoto.save();
       return res.status(200).render("photos/addPhoto", {
         mess: "Add Successfully!!!",
         photo: req.body,
+        user: req.user
       });
     } catch (error) {
       return res.status(500).render("photos/addPhoto", {
         mess: error,
         req: req.body,
+        user: req.user
       });
     }
   },
@@ -80,8 +87,16 @@ export const PhotoController = {
         return res.status(200).redirect("/photos?page=1");
       }
       result.photos = await PhotoModel.find();
+      if(result.photos.length < 1){
+        return res.status(400).render("photos/myPhotos", {
+          pageActives: [],
+          preCheck: true,
+          nextCheck: true,
+          user: req.user
+        });
+      }
       result.numberOfResult = result.photos.length;
-      result.photos = await PhotoModel.find().limit(pageSize).skip(skipIndex);
+      result.photos = await PhotoModel.find({user: req.user._id}).populate("user").limit(pageSize).skip(skipIndex);
       const maxPage = Math.ceil(result.numberOfResult / pageSize);
       if (page > maxPage) {
         return res.status(200).redirect("/photos?page=1");
@@ -93,6 +108,7 @@ export const PhotoController = {
         pageActives: paging(page, maxPage),
         preCheck: preCheck,
         nextCheck: nextCheck,
+        user: req.user
       });
     } catch (error) {
       res.status(400).json(error);
@@ -104,6 +120,7 @@ export const PhotoController = {
       return res.status(200).render("photos/editPhoto", {
         photo: photo,
         id: req.params.id,
+        user: req.user
       });
     } catch (error) {
       res.status(400).json(error);
@@ -119,7 +136,8 @@ export const PhotoController = {
           "photos/editPhoto",
           "Title maximum 140 characters long",
           photo,
-          "photo"
+          "photo",
+          req.user
         );
       }
       if (req.body.description.length > MAX_LENGTH_DESCRIPTION) {
@@ -128,7 +146,8 @@ export const PhotoController = {
           "photos/editPhoto",
           "Description maximum 300 characters long",
           photo,
-          "photo"
+          "photo",
+          req.user
         );
       }
       if (!req.file) {

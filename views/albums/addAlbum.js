@@ -1,10 +1,13 @@
 const MAX_SIZE_PHOTO = 5 * 1024 * 1024;
 const MAX_LENGTH_ALBUM = 25;
 function setImage(inputFile) {
+  var button = document.getElementsByClassName("btn-album")[0];
+  var span = document.getElementsByClassName("mess-album")[0];
   if (inputFile.files.length <= MAX_LENGTH_ALBUM) {
     var listImage = document.getElementsByClassName("image-albums")[0];
     var labelUpload = document.getElementsByClassName("label-upload")[0];
     var check = true;
+    button.disabled = false;
     for (const item of inputFile.files) {
       if (item.size > MAX_SIZE_PHOTO) {
         check = false;
@@ -23,10 +26,16 @@ function setImage(inputFile) {
         };
       }
       labelUpload.style.display = "none";
-    }else{
-      alert("Maximun size photo is 5MB!");
+    } else {
+      alert("Maximum size photo is 5MB!");
+      button.disabled = true;
+      span.innerHTML = "Please choose photo under 5MB!";
+      span.classList.add("error");
     }
   } else {
-    alert("Maximun 25 photos in album!");
+    alert("Maximum 25 photos in album!");
+    button.disabled = true;
+    span.innerHTML = "Please choose maximum 25 photos!";
+    span.classList.add("error");
   }
 }

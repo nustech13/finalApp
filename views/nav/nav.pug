@@ -2,14 +2,20 @@ body
     header
         nav.header
             div.nav
-                a(href="/feeds/photos?page=1")  
+                a(href="/feeds/photos")  
                     span.nav-name Fotobook 
                 form.nav-input
                     input.nav-search.form-control(type="text", name="", placeholder="Search Photo / Album")
                 ul.nav-right
-                    li 
-                        img.nav-avatar(src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png", alt="")
-                    li
-                        a.nav-name(href="#")  Thuan Nguyen
-                    li
-                        a.nav-logout(href="/auth/login")  Logout            
+                    if user
+                        li 
+                            a(href="/profile")
+                                img.nav-avatar(src=`/${user.image}`, alt="")
+                        li
+                            a.nav-name(href="/profile")=`${user.lastName + " " + user.firstName}`
+                        li
+                            form
+                                a.nav-logout(href="/auth/logout")  Logout  
+                    else
+                        li          
+                            a.nav-name(href="/auth/signin")  Login

@@ -52,7 +52,6 @@ export const deleteImage = (body, items) =>{
   for (const item of items) {
     if (!body.includes(item)) {
       fs.unlinkSync(`public/${item}`);
-      
     }
   }
 }
@@ -65,7 +64,8 @@ export const AlbumController = {
           "albums/addAlbum",
           "Title maximum 140 characters long",
           req.body,
-          "album"
+          "album",
+          req.user
         );
       }
       if (req.body.description.length > MAX_LENGTH_DESCRIPTION) {
@@ -74,7 +74,8 @@ export const AlbumController = {
           "albums/addAlbum",
           "Description maximum 300 characters long",
           req.body,
-          "album"
+          "album",
+          req.user
         );
       }
       if (req.files.length < 1) {
@@ -83,7 +84,8 @@ export const AlbumController = {
           "albums/addAlbum",
           "Please provide an image",
           req.body,
-          "album"
+          "album",
+          req.user
         );
       }
       const imagePath = path.join(__dirname, "../public/albums");
@@ -97,6 +99,7 @@ export const AlbumController = {
         description: req.body.description,
         images: images,
         isPublic: req.body.isPublic,
+        user: req.user._id
       });
       newAlbum.save();
       return res.status(200).render("albums/addAlbum", {
@@ -120,8 +123,16 @@ export const AlbumController = {
         return res.status(200).redirect("/albums?page=1");
       }
       result.albums = await AlbumModel.find();
+      if(result.albums.length < 1){
+        return res.status(400).render("albums/myAlbums", {
+          pageActives: [],
+          preCheck: true,
+          nextCheck: true,
+          user: req.user
+        });
+      }
       result.numberOfResult = result.albums.length;
-      result.albums = await AlbumModel.find().limit(pageSize).skip(skipIndex);
+      result.albums = await AlbumModel.find({user: req.user._id}).limit(pageSize).skip(skipIndex);
       const maxPage = Math.ceil(result.numberOfResult / pageSize);
       if (page > maxPage) {
         return res.status(200).redirect("/albums?page=1");
@@ -133,6 +144,7 @@ export const AlbumController = {
         pageActives: paging(page, maxPage),
         preCheck: preCheck,
         nextCheck: nextCheck,
+        user: req.user
       });
     } catch (error) {
       res.status(400).json(error);
@@ -143,6 +155,7 @@ export const AlbumController = {
       const album = await AlbumModel.findById(req.params.id);
       return res.status(200).render("albums/editAlbum", {
         album: album,
+        user: req.user
       });
     } catch (error) {
       res.status(400).json(error);
@@ -158,7 +171,8 @@ export const AlbumController = {
           "albums/editAlbum",
           "Title maximum 140 characters long",
           album,
-          "album"
+          "album",
+          req.user
         );
       }
       if (req.body.description.length > MAX_LENGTH_DESCRIPTION) {
@@ -167,7 +181,8 @@ export const AlbumController = {
           "albums/editAlbum",
           "Description maximum 300 characters long",
           album,
-          "album"
+          "album",
+          req.user
         );
       }
       if (!req.body.imageOld && req.files.length < 1) {
@@ -176,7 +191,8 @@ export const AlbumController = {
           "albums/editAlbum",
           "Must have at least an image",
           album,
-          "album"
+          "album",
+          req.user
         );
       }
       if (req.files.length < 1) {
@@ -195,23 +211,23 @@ export const AlbumController = {
       }      
       const imagePath = path.join(__dirname, "../public/albums");
       const fileUpload = new Resize(imagePath);
-      const images = [];
-      let oldImages = [];
-      if(req.body.imageOld){
-        deleteImage(req.body.imageOld, album.images);
-        for (const item of req.body.imageOld) {
-          oldImages.push(item);
-        }
-      }
+      let images = [];
       for (let i = 0; i < req.files.length; i++) {
         images.push("albums/" + (await fileUpload.save(req.files[i].buffer)));
       }
-      
+      if(req.body.imageOld && typeof req.body.imageOld !== "string"){
+        deleteImage(req.body.imageOld, album.images);
+        images=req.body.imageOld.concat(images)
+      }
+      if(req.body.imageOld && typeof req.body.imageOld === "string"){
+        deleteImage(req.body.imageOld, album.images);
+        images.unshift(req.body.imageOld);
+      }
       const albumUpdate = {
         title: title,
         description: description,
         isPublic: isPublic,
-        images: oldImages.concat(images)
+        images: images
       };
       
       await album.updateOne({ $set: albumUpdate });

@@ -21,16 +21,20 @@ passport.use(
       passwordField: "password",
       passReqToCallback: true,
     },
-    function (req, email, password, done) {
-      UserModel.findOne({ email: email }, function (err, user) {
+    (req, email, password, done) => {
+      UserModel.findOne({ email: email }, (err, user) => {
         if (err) {
           return done(err);
         }
         if (user) {
-          return done(null, false, { message: "Email is already in use." });
+          return done(null, false, { message: "Email is already in use!" });
+        }
+        if (password !== req.body.confirmPassword) {
+          return done(null, false, { message: "Confirm Password not match!" });
         }
         var newUser = new UserModel();
-        newUser.name = req.body.lastName + " " + req.body.firstName;
+        newUser.firstName = req.body.firstName;
+        newUser.lastName = req.body.lastName;
         newUser.email = email;
         newUser.password = newUser.encryptPassword(password);
         newUser.save(function (err, result) {
@@ -52,8 +56,8 @@ passport.use(
       passwordField: "password",
       passReqToCallback: true,
     },
-    function (req, email, password, done) {
-      UserModel.findOne({ email: email }, function (err, user) {
+    (req, email, password, done) => {
+      UserModel.findOne({ email: email }, (err, user) => {
         if (err) {
           return done(err);
         }
@@ -68,5 +72,3 @@ passport.use(
     }
   )
 );
-
-
