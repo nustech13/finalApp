@@ -1,19 +1,20 @@
-import { PhotoModel } from "../model/photoModel.js";
-import Resize from "../resize.js";
-import path from "path";
-import { fileURLToPath } from "url";
-import fs from "fs";
-import { paging } from "./albumController.js";
+import { PhotoModel } from '../model/PhotoModel.js';
+import Resize from '../resize.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+import { paging } from './AlbumController.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const MAX_LENGTH_TITLE = 140;
 const MAX_LENGTH_DESCRIPTION = 300;
+const START_PAGE = 1;
 export const handleError = (res, path, mess, body, bodyName, user) => {
   res.status(400).render(path, {
     mess: mess,
     error: "error",
     [bodyName]: body,
-    user: user
+    user: user,
   });
 };
 export const PhotoController = {
@@ -53,24 +54,24 @@ export const PhotoController = {
       const imagePath = path.join(__dirname, "../public/images");
       const fileUpload = new Resize(imagePath);
       const filename = await fileUpload.save(req.file.buffer);
-      const newPhoto = await new PhotoModel({
+      const newPhoto = new PhotoModel({
         title: title,
         description: description,
         image: "images/" + filename,
         isPublic: isPublic,
-        user: req.user._id
+        user: req.user._id,
       });
-      newPhoto.save();
+      await newPhoto.save();
       return res.status(200).render("photos/addPhoto", {
         mess: "Add Successfully!!!",
         photo: req.body,
-        user: req.user
+        user: req.user,
       });
     } catch (error) {
       return res.status(500).render("photos/addPhoto", {
         mess: error,
         req: req.body,
-        user: req.user
+        user: req.user,
       });
     }
   },
@@ -87,28 +88,31 @@ export const PhotoController = {
         return res.status(200).redirect("/photos?page=1");
       }
       result.photos = await PhotoModel.find();
-      if(result.photos.length < 1){
+      if (result.photos.length < 1) {
         return res.status(400).render("photos/myPhotos", {
           pageActives: [],
           preCheck: true,
           nextCheck: true,
-          user: req.user
+          user: req.user,
         });
       }
       result.numberOfResult = result.photos.length;
-      result.photos = await PhotoModel.find({user: req.user._id}).populate("user").limit(pageSize).skip(skipIndex);
+      result.photos = await PhotoModel.find({ user: req.user._id })
+        .populate("user")
+        .limit(pageSize)
+        .skip(skipIndex);
       const maxPage = Math.ceil(result.numberOfResult / pageSize);
       if (page > maxPage) {
         return res.status(200).redirect("/photos?page=1");
       }
-      let preCheck = page === 1;
+      let preCheck = page === START_PAGE;
       let nextCheck = page === maxPage;
       return res.status(200).render("photos/myPhotos", {
         photos: result.photos,
         pageActives: paging(page, maxPage),
         preCheck: preCheck,
         nextCheck: nextCheck,
-        user: req.user
+        user: req.user,
       });
     } catch (error) {
       res.status(400).json(error);
@@ -120,7 +124,7 @@ export const PhotoController = {
       return res.status(200).render("photos/editPhoto", {
         photo: photo,
         id: req.params.id,
-        user: req.user
+        user: req.user,
       });
     } catch (error) {
       res.status(400).json(error);
@@ -130,7 +134,7 @@ export const PhotoController = {
     try {
       const photo = await PhotoModel.findById(req.params.id);
       const { title, description, isPublic } = req.body;
-      if (req.body.title.length > MAX_LENGTH_TITLE) {
+      if (title.length > MAX_LENGTH_TITLE) {
         return handleError(
           res,
           "photos/editPhoto",
@@ -140,7 +144,7 @@ export const PhotoController = {
           req.user
         );
       }
-      if (req.body.description.length > MAX_LENGTH_DESCRIPTION) {
+      if (description.length > MAX_LENGTH_DESCRIPTION) {
         return handleError(
           res,
           "photos/editPhoto",
@@ -178,13 +182,10 @@ export const PhotoController = {
   },
   delete: async (req, res) => {
     try {
-      if (req.body.isDelete == "true") {
-        const photo = await PhotoModel.findById(req.params.id);
-        fs.unlinkSync(`public/${photo.image}`);
-        await PhotoModel.findByIdAndDelete(req.params.id);
-        return res.redirect("/photos");
-      }
-      return res.status(400).render("photos/editPhoto", {photo: await PhotoModel.findById(req.params.id)});
+      const photo = await PhotoModel.findById(req.params.id);
+      fs.unlinkSync(`public/${photo.image}`);
+      await PhotoModel.findByIdAndDelete(req.params.id);
+      return res.redirect("/photos");
     } catch (error) {
       res.status(400).json(error);
     }

@@ -1,4 +1,4 @@
-import routers from "../routers/router.js";
+import routers from '../routers/router.js';
 
 const routerConfig = (app) => {
   app.use("/feeds", routers.feedRouter);

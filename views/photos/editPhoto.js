@@ -1,10 +1,10 @@
 function checkDelete() {
-    var input = document.getElementsByClassName("input-delete-photo")[0];
     if(window.confirm("Do you want to delete this photo?")){
-        input.value = "true";
         alert("Deleted photo successfully!")
+        document.getElementsByClassName("form-delete-photo")[0].submit();
+        return true;
     }else{
-        input.value = "false";
-        alert("The deletion of the photo has been canceled!")
+        alert("The deletion of the photo has been canceled!");
+        return false;
     }
 }

@@ -1,18 +1,18 @@
-import { AlbumModel } from "../model/albumModel.js";
-import { PhotoModel } from "../model/photoModel.js";
-import { paging } from "./albumController.js";
-import dateFormat from "dateformat";
+import { AlbumModel } from '../model/AlbumModel.js';
+import { PhotoModel } from '../model/PhotoModel.js';
+import { paging } from './AlbumController.js';
+import dateFormat from 'dateformat';
+const PAGE_SIZE = 6;
+const START_PAGE = 1;
 export const FeedController = {
   getAllPhoto: async (req, res) => {
     const page = parseInt(req.query.page);
-    const pageSize = 6;
+    const pageSize = PAGE_SIZE;
     const skipIndex = (page - 1) * pageSize;
     const result = {
       photos: [],
       numberOfResult: "",
-      offset: "",
     };
-    let preCheck = page === 1;
     try {
       if (!page) {
         return res.status(200).redirect("/feeds/photos?page=1");
@@ -31,7 +31,6 @@ export const FeedController = {
         .sort({ createdAt: 1 })
         .limit(pageSize)
         .skip(skipIndex);
-      result.offset = skipIndex;
       for (const photo of result.photos) {
         photo.day = dateFormat(photo.createdAt, "h:MM tt dd/mm/yyyy");
       }
@@ -39,31 +38,29 @@ export const FeedController = {
       if (page > maxPage) {
         return res.status(200).redirect("/feeds/photos?page=1");
       }
+      let preCheck = page === START_PAGE;
       let nextCheck = page === maxPage;
-     
         return res.status(200).render("feeds/feeds", {
           photos: result.photos.reverse(),
           pageActives: paging(page, maxPage),
           preCheck: preCheck,
           nextCheck: nextCheck,
-          user: req.session.passport ? req.user : false,
+          user: req.user,
         });
       
       
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     }
   },
   getAllAlbum: async (req, res) => {
     const page = parseInt(req.query.page);
-    const pageSize = 6;
+    const pageSize = PAGE_SIZE;
     const skipIndex = (page - 1) * pageSize;
     const result = {
       albums: [],
       numberOfResult: "",
-      offset: "",
     };
-    let preCheck = page === 1;
     try {
       if (!page) {
         return res.status(200).redirect("/feeds/albums?page=1");
@@ -81,7 +78,6 @@ export const FeedController = {
       result.albums = await AlbumModel.find({ isPublic: true }).populate("user")
         .limit(pageSize)
         .skip(skipIndex);
-      result.offset = skipIndex;
       for (const album of result.albums) {
         album.day = dateFormat(album.createdAt, "h:MM tt dd/mm/yyyy");
       }
@@ -89,17 +85,18 @@ export const FeedController = {
       if (page > maxPage) {
         return res.status(200).redirect("/feeds/albums?page=1");
       }
+      let preCheck = page === START_PAGE;
       let nextCheck = page === maxPage;
-      
       return res.status(200).render("feeds/feeds", {
         albums: result.albums,
         pageActives: paging(page, maxPage),
         preCheck: preCheck,
         nextCheck: nextCheck,
         checkAlbum: true,
+        user: req.user
       });
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     }
   },
 };

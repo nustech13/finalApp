@@ -1,5 +1,5 @@
 import express from "express";
-import { PhotoController } from "../controller/photoController.js";
+import { PhotoController } from "../controller/PhotoController.js";
 import upload from "../middleware/uploadMiddleware.js";
 const photosRouter = express.Router();
 photosRouter.use("*", (req, res, next)=>{

@@ -58,6 +58,6 @@ html
                         div.bottom
                             button.btn-album(type="submit") Edit
                             span.mess.mess-album(class= error)=mess
-                    form.delete(action=`/albums/${album._id}?_method=DELETE`, method="POST") 
-                        input.input-delete-album(type="hidden", value="", name="isDelete")
-                        button(onclick="checkDelete()") Delete
+                    form.delete.form-delete-album(action=`/albums/${album._id}?_method=DELETE`, method="POST") 
+                        button(type="button",onclick="checkDelete()")
+                            i.fas.fa-trash-alt  Delete
