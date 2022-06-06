@@ -44,9 +44,8 @@ html
                             label(for="email") Email
                             input#email(type="text", name="email", value=user.email, placeholder="Email", disabled, required).form-control
                         div.btn-infor
-                            button.btn.btn-success Save
-                            if isSuccess
-                                span(class=error)=isSuccess
+                            button.btn.btn-success.btn-profile  Save
+                            span.mess-profile(class=error)=isSuccess
                     form(action="/profile/pass?_method=PATCH", method="POST").bottom
                         div.title
                             span Password   
@@ -61,8 +60,7 @@ html
                             input#conPass(type="password", name="conPass", placeholder="Password Confirmation", required).form-control
                         div.btn-infor
                             button.btn.btn-success Save
-                            if mess
-                                span(class=error)=mess
+                            span(class=error)=mess
                                       
                 
             

@@ -53,9 +53,9 @@ html
                         div.bottom
                             button.btn-photo(type="submit") Edit
                             span.mess.mess-photo(class= error)=mess
-                    form.delete(action=`/photos/${photo._id}?_method=DELETE`, method="POST") 
-                        input.input-delete-photo(type="hidden", value="", name="isDelete")
-                        button(onclick="checkDelete()") Delete                
+                    form.delete.form-delete-photo(action=`/photos/${photo._id}?_method=DELETE`, method="POST") 
+                        button(type="button" ,onclick="checkDelete()") 
+                            i.fas.fa-trash-alt  Delete                
                                     
 
             footer

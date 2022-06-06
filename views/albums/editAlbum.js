@@ -53,12 +53,12 @@ function setImageEdit(inputFile) {
   }
 }
 function checkDelete() {
-  var input = document.getElementsByClassName("input-delete-album")[0];
   if(window.confirm("Do you want to delete this album?")){
-      input.value = "true";
-      alert("Deleted album successfully!")
+      alert("Deleted album successfully!");
+      document.getElementsByClassName("form-delete-album")[0].submit();
+      return true;
   }else{
-      input.value = "false";
-      alert("The deletion of the album has been canceled!")
+      alert("The deletion of the album has been canceled!");
+      return false;
   }
 }

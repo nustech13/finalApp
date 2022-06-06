@@ -1,4 +1,4 @@
-import { validationResult } from "express-validator";
+import { validationResult } from 'express-validator';
 
 export const AuthController = {
   getViewSignin: (req, res) => {
@@ -10,7 +10,7 @@ export const AuthController = {
         body: req,
       });
     }else{
-      res.redirect("/feeds");
+      return res.redirect("/feeds");
     }
   },
   getViewSignup: (req, res) => {
@@ -24,7 +24,7 @@ export const AuthController = {
     if (req.session.passport) {
       req.logout(req.user, (err) => {
         if (err) return next(err);
-        res.redirect("/auth/signin");
+        return res.redirect("/auth/signin");
       });
     }
   },

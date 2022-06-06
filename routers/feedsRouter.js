@@ -1,5 +1,5 @@
 import express from "express";
-import { FeedController } from "../controller/feedController.js";
+import { FeedController } from "../controller/FeedController.js";
 const feedRouter = express.Router();
 feedRouter.get("/", (req, res) => {
   return res.redirect("/feeds/photos");
