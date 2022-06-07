@@ -10,7 +10,6 @@ profileRouter.use("*", (req, res, next) => {
   }
 });
 profileRouter.get("/", (req, res) => {
-  console.log(req.user);
   res.render("profile/profile", { user: req.user });
 });
 profileRouter.patch(

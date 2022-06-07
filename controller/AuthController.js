@@ -18,6 +18,7 @@ export const AuthController = {
     return res.render("signup/signup", {
       messages: messages,
       hasErrors: messages.length > 0,
+      user: req.user
     });
   },
   logout: (req, res) => {
@@ -41,6 +42,7 @@ export const AuthController = {
         messages: messages,
         hasErrors: messages.length > 0,
         body: req.body,
+        user: req.user
       });
     } else {
       next();

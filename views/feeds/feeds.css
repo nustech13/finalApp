@@ -196,6 +196,7 @@ div.content-photo span{
     left: 0;
     right: 0;
     text-overflow: ellipsis;
+    word-wrap: break-word;
     overflow: hidden;
     white-space: wrap; 
 }

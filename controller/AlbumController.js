@@ -210,7 +210,7 @@ export const AlbumController = {
           isPublic: isPublic,
           images: req.body.imageOld,
         };
-        await album.updateOne({ $set: albumUpdate });
+        await album.updateOne(albumUpdate);
         return res.status(200).render("albums/editAlbum", {
           mess: "Update Successfully!!!",
           album: await AlbumModel.findById(req.params.id),
@@ -242,7 +242,7 @@ export const AlbumController = {
         isPublic: isPublic,
         images: images,
       };
-      await album.updateOne({ $set: albumUpdate });
+      await album.updateOne(albumUpdate);
       return res.status(200).render("albums/editAlbum", {
         mess: "Update Successfully!!!",
         album: await AlbumModel.findById(req.params.id),

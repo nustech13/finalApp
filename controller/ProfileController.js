@@ -60,7 +60,7 @@ export const ProfileController = {
       lastName: req.body.lastName,
       image: "avatars/" + filename,
     };
-    await userUpdate.updateOne({ $set: newInfor });
+    await userUpdate.updateOne(newInfor);
     return handleErrorPass(
       await UserModel.findById(req.user._id),
       res,

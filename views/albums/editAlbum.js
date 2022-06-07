@@ -6,7 +6,6 @@ function removeImage(no) {
 }
 window.addEventListener("load", function(event) {
   albumOldLength = document.getElementsByClassName('label-picture').length;
-  console.log(albumOldLength)
   if(albumOldLength === 25){
     var labelUpload = document.getElementsByClassName("label-upload")[0];
     labelUpload.style.display = "none";

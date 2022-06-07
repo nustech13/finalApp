@@ -159,7 +159,7 @@ export const PhotoController = {
           description: description,
           isPublic: isPublic,
         };
-        await photo.updateOne({ $set: photoUpdate });
+        await photo.updateOne(photoUpdate);
         return res.status(200).render("photos/editPhoto", {
           mess: "Update Successfully!!!",
           photo: await PhotoModel.findById(req.params.id),
@@ -176,7 +176,7 @@ export const PhotoController = {
         isPublic: isPublic,
         image: "images/" + filename,
       };
-      await photo.updateOne({ $set: photoUpdate });
+      await photo.updateOne(photoUpdate);
       return res.status(200).render("photos/editPhoto", {
         mess: "Update Successfully!!!",
         photo: await PhotoModel.findById(req.params.id),

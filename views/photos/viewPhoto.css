@@ -7,7 +7,7 @@ div.show-photo{
     display: none;
 }
 div.show-photo div.photo-item{
-    width: 600px;
+    width: 800px;
     background-color: #F7F7F7;
     position: relative;
     top: 100px;
@@ -25,6 +25,9 @@ div.show-photo div.photo-item div.photo-title{
 div.show-photo div.photo-item div.photo-title span{
     font-size: 16px;
     font-weight: 600;
+    word-wrap: break-word;
+}
+div.show-photo div.photo-item div.photo-content span{
     word-wrap: break-word;
 }
 div.show-photo div.photo-item div.photo-image img{

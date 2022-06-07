@@ -27,6 +27,9 @@ div.show-album div.photo-item div.photo-title span{
     font-weight: 600;
     word-wrap: break-word;
 }
+div.show-album div.photo-item div.photo-content span{
+    word-wrap: break-word;
+}
 div.show-album div.photo-item div.photo-image img{
     margin: 20px 0;
     width: 100%;
