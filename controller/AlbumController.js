@@ -61,7 +61,8 @@ export const deleteImage = (body, items) => {
 export const AlbumController = {
   add: async (req, res) => {
     try {
-      if (req.body.title.length > MAX_LENGTH_TITLE) {
+      const { title, description, isPublic } = req.body;
+      if (title.length > MAX_LENGTH_TITLE) {
         return handleError(
           res,
           "albums/addAlbum",
@@ -71,7 +72,7 @@ export const AlbumController = {
           req.user
         );
       }
-      if (req.body.description.length > MAX_LENGTH_DESCRIPTION) {
+      if (description.length > MAX_LENGTH_DESCRIPTION) {
         return handleError(
           res,
           "albums/addAlbum",
@@ -94,20 +95,21 @@ export const AlbumController = {
       const imagePath = path.join(__dirname, "../public/albums");
       const fileUpload = new Resize(imagePath);
       const images = [];
-      for (let i = 0; i < req.files.length; i++) {
-        images.push("albums/" + (await fileUpload.save(req.files[i].buffer)));
+      for (const item of req.files) {
+        images.push("albums/" + (await fileUpload.save(item.buffer)));
       }
       const newAlbum = new AlbumModel({
-        title: req.body.title,
-        description: req.body.description,
+        title: title,
+        description: description,
         images: images,
-        isPublic: req.body.isPublic,
+        isPublic: isPublic,
         user: req.user._id,
       });
       await newAlbum.save();
       return res.status(200).render("albums/addAlbum", {
         mess: "Add Successfully!!!",
         album: req.body,
+        user: req.user
       });
     } catch (error) {
       return res.status(400).json(error);
@@ -211,14 +213,15 @@ export const AlbumController = {
         await album.updateOne({ $set: albumUpdate });
         return res.status(200).render("albums/editAlbum", {
           mess: "Update Successfully!!!",
-          album: album,
+          album: await AlbumModel.findById(req.params.id),
+          user: req.user
         });
       }
       const imagePath = path.join(__dirname, "../public/albums");
       const fileUpload = new Resize(imagePath);
       let images = [];
-      for (let i = 0; i < req.files.length; i++) {
-        images.push("albums/" + (await fileUpload.save(req.files[i].buffer)));
+      for (const item of req.files) {
+        images.push("albums/" + (await fileUpload.save(item.buffer)));
       }
       if (req.body.imageOld && typeof req.body.imageOld !== "string") {
         deleteImage(req.body.imageOld, album.images);
@@ -227,6 +230,11 @@ export const AlbumController = {
       if (req.body.imageOld && typeof req.body.imageOld === "string") {
         deleteImage(req.body.imageOld, album.images);
         images.unshift(req.body.imageOld);
+      }
+      if(!req.body.imageOld){
+        for (const item of album.images) {
+          fs.unlinkSync(`public/${item}`);
+        }
       }
       const albumUpdate = {
         title: title,
@@ -237,7 +245,8 @@ export const AlbumController = {
       await album.updateOne({ $set: albumUpdate });
       return res.status(200).render("albums/editAlbum", {
         mess: "Update Successfully!!!",
-        album: album,
+        album: await AlbumModel.findById(req.params.id),
+        user: req.user
       });
     } catch (error) {
       return res.status(400).json(error);

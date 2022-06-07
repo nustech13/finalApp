@@ -1,6 +1,6 @@
-import express from "express";
-import upload from "../middleware/uploadMiddleware.js";
-import { AlbumController } from "../controller/AlbumController.js";
+import express from 'express';
+import upload from '../middleware/UploadMiddleware.js';
+import { AlbumController } from '../controller/AlbumController.js';
 const albumsRouter = express.Router();
 albumsRouter.use("*", (req, res, next)=>{
   if (!req.session.passport) {

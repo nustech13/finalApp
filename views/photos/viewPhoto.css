@@ -7,7 +7,7 @@ div.show-photo{
     display: none;
 }
 div.show-photo div.photo-item{
-    width: 800px;
+    width: 600px;
     background-color: #F7F7F7;
     position: relative;
     top: 100px;

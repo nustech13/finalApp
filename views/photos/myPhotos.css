@@ -10,8 +10,10 @@ section div.container-my-photo{
     justify-content: flex-start;
 }
 div.container div.list-my-card div.card-my-photo{
-    width: 23%;
+    width: 22%;
     margin: 10px 20px 10px 0px;
+    box-shadow: 4px 4px 5px #938f8f;
+    border-radius: 5px;
 }
 div.container div.list-my-card div.card-my-photo div.my-image{
     width: 100%;
