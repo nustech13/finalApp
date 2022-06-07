@@ -1,6 +1,6 @@
-import express from "express";
-import { PhotoController } from "../controller/PhotoController.js";
-import upload from "../middleware/uploadMiddleware.js";
+import express from 'express';
+import { PhotoController } from '../controller/PhotoController.js';
+import upload from '../middleware/UploadMiddleware.js';
 const photosRouter = express.Router();
 photosRouter.use("*", (req, res, next)=>{
   if (!req.session.passport) {

@@ -1,8 +1,8 @@
-import feedRouter from "./feedsRouter.js";
-import photosRouter from "./photosRouter.js";
-import albumsRouter from "./albumsRouter.js";
-import authRouter from "./authRouter.js";
-import profileRouter from "./profileRouter.js"
+import feedRouter from './FeedsRouter.js';
+import photosRouter from './PhotosRouter.js';
+import albumsRouter from './AlbumsRouter.js';
+import authRouter from './AuthRouter.js';
+import profileRouter from './ProfileRouter.js'
 const routers = {
   feedRouter,
   photosRouter,

@@ -4,6 +4,7 @@ function setImage(inputFile) {
   var span = document.getElementsByClassName("mess-photo")[0];
   if (inputFile.files[0].size < MAX_SIZE_PHOTO) {
     button.disabled = false;
+    button.style.opacity = "1";
     var image = document.getElementsByClassName("upload-img")[0];
     var fReader = new FileReader();
     fReader.readAsDataURL(inputFile.files[0]);
@@ -13,6 +14,7 @@ function setImage(inputFile) {
   } else {
     alert("Maximun size photo is 5MB!");
     button.disabled = true;
+    button.style.opacity = "0.7";
     span.innerHTML = "Please choose photo under 5MB!";
     span.classList.add("error");
   }

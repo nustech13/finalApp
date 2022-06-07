@@ -5,7 +5,7 @@ html
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
         link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
-        title Login
+        title Signin
         style
             include ../feeds/feeds.css
             include ./signin.css
@@ -17,7 +17,7 @@ html
                     h1.login Fotobook Login
                     form(action="/auth/signin" method="POST").login-form
                         img(src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120", alt="")
-                        input(type="text", name="email", placeholder="Email" required).email-login.form-control
+                        input(type="text", name="email", placeholder="Email", autofocus, required).email-login.form-control
                         input(type="password", name="password", placeholder="Password" required).password-login.form-control
                         button(type="submit").btn Login
                         a(href="#").login-link Forgot password?

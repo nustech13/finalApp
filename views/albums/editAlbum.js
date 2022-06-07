@@ -20,6 +20,7 @@ function setImageEdit(inputFile) {
     var labelUpload = document.getElementsByClassName("label-upload")[0];
     var check = true;
     button.disabled = false;
+    button.style.opacity = "1";
     for (const item of inputFile.files) {
       if (item.size > 5 * 1024 * 1024) {
         check = false;
@@ -42,6 +43,7 @@ function setImageEdit(inputFile) {
     }else{
       alert("Maximum size photo is 5MB!");
       button.disabled = true;
+      button.style.opacity = "0.7";
       span.innerHTML = "Please choose photo under 5MB!";
       span.classList.add("error");
     }

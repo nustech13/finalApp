@@ -5,7 +5,7 @@ html
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
         link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
-        title Add Album
+        title New Album
         style
             include ../feeds/feeds.css
             include ./addAlbum.css
@@ -32,7 +32,7 @@ html
                             div.left
                                 div.title
                                     label(for="title") Title
-                                    input(type="text", name="title", value=album.title, placeholder="Album Title", required) 
+                                    input(type="text", name="title", value=album.title, placeholder="Album Title", autofocus, required) 
                                 div.lock
                                     label(for="isPublic") Sharing mode
                                     select(name="isPublic")

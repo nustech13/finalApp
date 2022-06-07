@@ -50,13 +50,13 @@ input#image {
 
 div.title {
     padding: 10px 0;
-    padding-right: 30px;    
+    padding-right: 20px;    
     color: #3B5998;
     font-weight: 600;
 }
 div.input-profile {
-    width: 400px;
-    margin-right: 120px;
+    width: 420px;
+    margin-right: 115px;
     display: flex;
     align-items: center;
     height: 45px;
@@ -75,7 +75,7 @@ div.input-profile input {
 }
 div.btn-infor {
     margin: 10px 0;
-    margin-right: 100px;  
+    margin-right: 95px;  
     position: relative;  
 }
 div.btn-infor span{

@@ -80,7 +80,7 @@ export const ProfileController = {
         "error"
       );
     }
-    if (req.body.newPass !== req.body.conPass) {
+    if (req.body.newPass === req.body.curPass) {
       return handleErrorPass(
         req.user,
         res,

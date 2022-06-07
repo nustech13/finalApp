@@ -5,7 +5,7 @@ html
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css", integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", crossorigin="anonymous")
         link(rel="icon", href ="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png", type = "image/x-icon")
-        title Feeds
+        title Profile
         style
             include ../feeds/feeds.css
             include ./profile.css
@@ -36,7 +36,7 @@ html
                             span Basic Information
                         div.input-profile 
                             label(for="firstName") First Name
-                            input#firstName(type="text", name="firstName", placeholder="First Name", value=user.firstName,autofocus, required).form-control
+                            input#firstName(type="text", name="firstName", placeholder="First Name", value=user.firstName, autofocus, required).form-control
                         div.input-profile 
                             label(for="lastName") Last Name
                             input#lastName(type="text", name="lastName", value=user.lastName, placeholder="Last Name", required).form-control

@@ -48,7 +48,6 @@ export const FeedController = {
           user: req.user,
         });
       
-      
     } catch (error) {
       return res.status(500).json(error);
     }

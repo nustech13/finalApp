@@ -115,7 +115,7 @@ export const PhotoController = {
         user: req.user,
       });
     } catch (error) {
-      res.status(400).json(error);
+      return res.status(400).json(error);
     }
   },
   getViewEdit: async (req, res) => {
@@ -123,11 +123,10 @@ export const PhotoController = {
       const photo = await PhotoModel.findById(req.params.id);
       return res.status(200).render("photos/editPhoto", {
         photo: photo,
-        id: req.params.id,
         user: req.user,
       });
     } catch (error) {
-      res.status(400).json(error);
+      return res.status(400).json(error);
     }
   },
   update: async (req, res) => {
@@ -155,10 +154,16 @@ export const PhotoController = {
         );
       }
       if (!req.file) {
-        await photo.updateOne({ $set: req.body });
+        const photoUpdate = {
+          title: title,
+          description: description,
+          isPublic: isPublic,
+        };
+        await photo.updateOne({ $set: photoUpdate });
         return res.status(200).render("photos/editPhoto", {
           mess: "Update Successfully!!!",
           photo: await PhotoModel.findById(req.params.id),
+          user: req.user
         });
       }
       const imagePath = path.join(__dirname, "../public/images");
@@ -175,9 +180,10 @@ export const PhotoController = {
       return res.status(200).render("photos/editPhoto", {
         mess: "Update Successfully!!!",
         photo: await PhotoModel.findById(req.params.id),
+        user: req.user
       });
     } catch (error) {
-      res.status(400).json(error);
+      return res.status(400).json(error);
     }
   },
   delete: async (req, res) => {
@@ -187,7 +193,7 @@ export const PhotoController = {
       await PhotoModel.findByIdAndDelete(req.params.id);
       return res.redirect("/photos");
     } catch (error) {
-      res.status(400).json(error);
+      return res.status(400).json(error);
     }
   },
 };
